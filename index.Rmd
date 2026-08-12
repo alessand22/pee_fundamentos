@@ -136,10 +136,10 @@ Os **percentis (P1, P2, ..., P99)** dividem os dados em centésimas partes (cada
 
 ```{r, echo=FALSE}
 x <- seq(-3,3, length=100)
+
 plot(function(x) dnorm(x, 0,.8),-4,4, ylim=c(0,.5),col=3, xaxt="n",yaxt="n",ann=FALSE)
 plot(function(x) dnorm(x,  0,1.3),-4,4, add=T,col=2)
 plot(function(x) dnorm(x, 0,1),-4,4, add=T,col=1)
-#legend(120,0.05,c("N(100,64)","N(90,64)","N(100,225)"),fill=1:3, bty = "n", pch=20,pt.cex=3)
 legend(1.8,0.5,c("Leptocúrtica","Mesocúrtica","Plantocúrtica"), bty = "n", pch=20 , col=c(3,1,2), text.col = "black", cex=1.2, pt.cex=3)
 title("Curtose")
 ```
@@ -147,7 +147,6 @@ title("Curtose")
 Vamos analisar os dados de experimentos de tempo de vida útil de baterias em anos que estão no documento "bateria.RData". Iniciamos importando os dados e examinado o objeto baterias que é um data frame que possui uma variável denominada vida_util, com 40 observações.
 
 ```{r}
-# Procedimentos preliminares
 # Importação, preparação e inspeção
 load("bateria.RData") # carregar dados em .RData
 
@@ -161,7 +160,6 @@ Pode-se iniciar a análise examinando as estatísticas mais básicas como o coma
 
 ```{r, warning=FALSE}
 # Estatisticas descritivas
-# Comando summary
 
 summary(bateria)
 ```
@@ -482,6 +480,7 @@ axis(1, at=c(bins),
      lty=0,
      line=-1,
      cex.axis=1)
+
 par(par.copy) # Reestabelece as configuracoes originais
 ```
 
@@ -524,7 +523,9 @@ range(roleta)
 
 ```{r eval=FALSE, include=FALSE}
 prob.roleta<-rep(1,length(roleta))/max(roleta)
+
 plot(roleta,prob.roleta, type = "l", xlim=c(0,length(roleta)), xaxs="i",yaxt="n",xlab = "Valores",ylab = "f(x)")
+
 title(main="Função de Densidade de uma Roleta de graus")
 axis(side=2, "1/360",at=c(1/max(roleta)), las = 2)
 box()
@@ -1161,22 +1162,43 @@ $$H_0: \mu_M=\mu_U$$
 $$H_1: \mu_M\neq\mu_U$$
 
 ```{r}
-### ~ ~ ~ ~ ~        2 - UM FATOR COM DOIS níveis   ~ ~ ~ ~ ~ ###
 # resistência a tensão adesiva (Tension Bond Strength data) (Tab. 2-1, p. 24)
+
+
 y1 <- c(16.85,16.40,17.21,16.35,16.52,17.04,16.96,17.15,16.59,16.57)
 y2 <- c(16.62,16.75,17.37,17.12,16.98,16.87,17.34,17.02,17.08,17.27)
 
-y <- data.frame(Modified=y1,Unmodified=y2) # com rotulos
+# y1 = modificado
+# y2 = naomod
 
-# análise exploratória
-# Estisticas descritivas
-attach(y)
-y.means <- apply(y,2,mean) # média por 2 (coluna)
+mean(y1)
+mean(y2)
 
-# análise descritiva gráfica
-stripchart(y,xlab=expression(paste("Strength (",kgf/cm^2,")")),pch=19)
-arrows(y.means,rep(1.5,2),y.means,c(1.1,1.9),length=.1)
-text(y.means,c(1.2,1.8),round(y.means,2),pos=4,cex=.8)
+resp <- c(y1,y2) # num só vetor
+resp
+
+argamassa <- rep(c("Modificado", "NaoMod"), c(10,10))
+argamassa
+
+dados <- data.frame(argamassa, resp)
+dados$argamassa <- factor(dados$argamassa) # Converter em fator
+
+y.means <- tapply(dados$resp, dados$argamassa, mean)
+y.means
+
+stripchart(resp ~ argamassa,
+           data = dados,
+           vertical = TRUE,
+           method = "jitter",
+           pch = 19,
+           col = c("blue", "darkgreen"),
+           xlab = expression(paste("Strength (", kgf/cm^2, ")")))
+
+points(1:2, y.means, pch = 23, bg = "yellow", cex = 1.5)
+
+text(1:2, y.means,
+     labels = round(y.means, 2),
+     pos = 3, cex = .8)
 ```
 
 O gráfico de pontos (*strichart*) sugere que a distribuição amostral de resistência das fibras não modificadas (*Unmodified*) apresentam valores superiores à distribuição da modificada. As médias, indicadas cadas pelas setas, exibem que a resistência das modificadas é ligeiramente maior do que resistência média das não modificadas.
@@ -1184,12 +1206,14 @@ O gráfico de pontos (*strichart*) sugere que a distribuição amostral de resis
 A seguir, elabora-se o Boxplot com médias indicadas por '+'
 
 ```{R}
-boxplot(Modified,Unmodified, 
-        names=names(y),
-        col=c("slategray3","indianred1"), 
-        las=1,
-        ylab="Strength (kgf/cm^2)")
-points(y.means, pch='+', cex=1.5, col=1)
+boxplot(resp ~ argamassa,
+        data = dados,
+        col = c("slategray3","indianred1"),
+        las = 1,
+        ylab = "Strength (kgf/cm^2)")
+
+
+points(1:2, y.means, pch = 23, bg = "yellow", cex = 1.5)
 ```
 
 Verificação gráfica da normalidade dos dados
@@ -1197,21 +1221,27 @@ Verificação gráfica da normalidade dos dados
 ```{r}
 ### Verificação Gráfica da Normalidade
 
-qqnorm(Modified, main="Modified - Normal Q-Q plot"); qqline(Modified)
-qqnorm(Unmodified,main="Unmodified - Normal Q-Q plot"); qqline(Unmodified)
+qqnorm(dados$resp[dados$argamassa == "Modificado"],
+       main = "Modificado - Normal Q-Q plot")
+qqline(dados$resp[dados$argamassa == "Modificado"])
+
+qqnorm(dados$resp[dados$argamassa == "NaoMod"],
+       main = "NaoMod - Normal Q-Q plot")
+qqline(dados$resp[dados$argamassa == "NaoMod"])
 
 # Valores padronizados
-qqnorm(scale(Modified), main="Modified padronizado - Normal Q-Q plot"); qqline(scale(Modified))
-qqnorm(scale(Unmodified),main="Unmodified padronizado - Normal Q-Q plot"); qqline(scale(Unmodified))
+qqnorm(scale(dados$resp[dados$argamassa == "Modificado"]), main="Modificada padronizada - Normal Q-Q plot"); qqline(scale(dados$resp[dados$argamassa == "Modificado"]))
+
+qqnorm(scale(dados$resp[dados$argamassa == "NaoMod"]),main="NaoMod padronizada - Normal Q-Q plot"); qqline(scale(dados$resp[dados$argamassa == "NaoMod"]))
 
 # Histogramas
-hist(scale(Modified), freq=FALSE)
-curve(dnorm(x), add=TRUE, col=2); lines(density(scale(Modified)), col=3)
+hist(scale(dados$resp[dados$argamassa == "Modificado"]), freq=FALSE, main = "Histograma de Argamassa Modificada")
+curve(dnorm(x), add=TRUE, col=2); lines(density(scale(dados$resp[dados$argamassa == "Modificado"])), col=3)
 legend(.5,0.6, c("Dens. teórica","Dens. empírica"), fill=c("red", "green"),box.col=0, horiz=F )
 
 
-hist(scale(Unmodified), freq=FALSE)
-curve(dnorm(x), add=TRUE, col=2); lines(density(scale(Unmodified)), col=3)
+hist(scale(dados$resp[dados$argamassa == "NaoMod"]), freq=FALSE, main = "Histograma de Argamassa Não Modificada")
+curve(dnorm(x), add=TRUE, col=2); lines(density(scale(dados$resp[dados$argamassa == "NaoMod"])), col=3)
 legend(-2,0.4, c("Dens. teórica","Dens. empírica"), col=c("red", "green"),lty=c(1,1),box.col=0, horiz=F )
 ```
 
@@ -1221,8 +1251,7 @@ legend(-2,0.4, c("Dens. teórica","Dens. empírica"), col=c("red", "green"),lty=
 ```{r}
 # 2.3 TESTE DE DUAS médias INDEPENDENTES
 ### Teste de normalidade
-shapiro.test(Modified)
-shapiro.test(Unmodified)
+tapply(dados$resp, dados$argamassa, shapiro.test)
 
 # Normalidade = OK, OK
 ```
@@ -1251,7 +1280,7 @@ A seguir, os comandos do teste F para as variâncias das distribuições amostra
 
 ```{r}
 ### Teste F de homogeneidade de variâncias
-var.test(Modified, Unmodified)
+var.test(resp ~ argamassa, data = dados)
 ```
 
 Como se pode observar nos resultados, o valor P da estatística F é maior do que significância estabelecida, $F(9, 9) = 1.6293, p = .4785$, de modo que não se pode rejeitar a hipótese nula de que homocedasticidade, ou seja, as variâncias das amostras são iguais.
@@ -1274,13 +1303,9 @@ No R, o teste de Levene pode ser realizado pela função `leveneTest()` do pacot
 # Teste de Levene
 
 library(car)
-# Organizar dados em df. Uma coluna com dados e outra com fator indicado os tratamentos
-resp<-c(Modified, Unmodified)
-trat<-rep(c("Mod","Unm"),c(10,10))
-dados<-data.frame(resposta=resp,tratamento=trat)
 
-leveneTest(resposta~tratamento ,data=dados) # Brown-Forsythe test
-leveneTest(resposta~tratamento, center = mean ,data=dados) # Levene
+leveneTest(resp ~ argamassa ,data=dados) # Brown-Forsythe test
+leveneTest(resp ~ argamassa, center = mean ,data=dados) # Levene
 # Homocedasticidade = OK: variâncias iguais
 ```
 
@@ -1321,7 +1346,7 @@ A seguir os comandos do teste t para dois tratamentos independentes no R, consid
 
 ```{r}
 ### Teste t para amostras independentes com variáveis iguais
-t.test(Modified, Unmodified, var.equal=T)
+t.test(resp ~ argamassa, var.equal=T)
 ```
 
 Para se obter o valor crítico $t_{0,05/2;18}$
