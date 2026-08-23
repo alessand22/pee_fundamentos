@@ -218,7 +218,7 @@ legend(1.8, 0.5,
 ```
 
 
-Vamos analisar os dados de experimentos de tempo de vida útil de baterias em anos que estão no documento "bateria.RData". Iniciamos importando os dados e examinado o objeto baterias que é um data frame que possui uma variável denominada vida_util, com 40 observações.
+Vamos analisar os dados de experimentos de tempo de vida útil de baterias em anos que estão no documento [**dadosConnepi.xlsx**](bateria.RData). Iniciamos importando os dados e examinado o objeto baterias que é um data frame que possui uma variável denominada vida_util, com 40 observações.
 
 ```{r}
 # Importação, preparação e inspeção
@@ -423,7 +423,7 @@ hist(bateria$vida_util, col = "red")
 ```
 
 ### Exercício
-Os dados da força de ruptura em libras por polegada quadrada para 100 garrafas descartáveis de 1 litro de refrigerante estão no arquivo **dadosForca.R**. Essas medidas foram obtidas, testando-se cada garrafa até ocorrer a quebra. (FONTE: HINES et al. (2006), Tabela 8-2, p. 157).
+Os dados da força de ruptura em libras por polegada quadrada para 100 garrafas descartáveis de 1 litro de refrigerante estão no arquivo [**dadosForca.R**](dadosForca.R). Essas medidas foram obtidas, testando-se cada garrafa até ocorrer a quebra. (FONTE: HINES et al. (2006), Tabela 8-2, p. 157).
 
 Faça o que se pede:
 
