@@ -1,29 +1,21 @@
 ---
 title: "Estatística básica para experimentos"
-author:
-- affiliation: GEAG e PPGEMAT/IFPA
-  email: alessandro.correa@ifpa.edu.br
-  name: Prof. Alessandro de Castro Corrêa, D.Sc.
-date: "14 de fevereiro de 2023"
-output:
-  html_document:
+author: 
+  - name: "Alessandro de Castro Corrêa"
+    email: alessandro.correa@ifpa.edu.br
+    affiliations: Instituto Federal do Pará - IFPA
+lang: "pt"
+format:
+  html:
     toc: true
-    df_print: paged
-  pdf_document:
-    toc: true
+    number-sections: true
+    toc-location: left
+    fig-cap-location: top
+#bibliography: referencias.bib
+#csl: associacao-brasileira-de-normas-tecnicas-ipea.csl
+editor: source
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
-```{r, echo=FALSE, message=FALSE}
-htmltools::img(src = knitr::image_uri("Figuras/logo_ppgemat.jpg"),
-               # src = knitr::image_uri("Figuras/logo_geag_4.jpg"),
-               alt = 'logo', 
-               style = 'position:absolute; top:0; right:0; padding:10px;')
-```
 
 # Termos Básicos
 
@@ -43,7 +35,15 @@ $$\bar{x}=\dfrac{\sum\limits_ {i=1}^n x}{n}$$
 - **Estimativa (estatística)**: o valor da estimativa.
 $$\bar{x}=\dfrac{4+5+6}{3}=5$$
 
-<p align="center"> ![](figuras\img_pop_amostra.png){ width=60% } </p>
+
+```{r}
+#| echo: false
+#| fig-cap: "População e amostra"
+#| label: fig-pop_amostra
+#| fig-align: center
+
+knitr::include_graphics("figuras/img_pop_amostra.png")
+```
 
 
 ## Classificação das variáveis
@@ -57,14 +57,28 @@ $$\bar{x}=\dfrac{4+5+6}{3}=5$$
 
 
 ## Tipos de comparações das amostras
-**Independentes (Não Pareadas ou Não relacionadas)**
-
-<p align="center"> ![](figuras\img_independentes.png){ width=60% } </p>
 
 
-**Dependentes (Pareadas ou Relacionadas)**
+```{r}
+#| echo: false
+#| fig-cap: "Independentes (Não Pareadas ou Não relacionadas)"
+#| label: fig-independentes
+#| fig-align: center
 
-<p align="center"> ![](figuras\img_dependentes.png){ width=60% }</p>
+knitr::include_graphics("figuras/img_independentes.png")
+```
+
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Dependentes (Pareadas ou Relacionadas)"
+#| label: fig-dependentes
+#| fig-align: center
+
+knitr::include_graphics("figuras/img_dependentes.png")
+```
+
 
 
 # Estatísticas descritivas
@@ -119,9 +133,16 @@ classificação do CV segundo Pimentel e Gomes (1985), baseada em ensaios agríc
 ## Medidas de posição não central
 Os **quartis (Q1, Q2 e Q3)**: são valores que dividem a distribuição da amostra ordenada em ordem crescente em quatro partes iguais. O primeiro quartil, Q1, é o número que deixa 25% das observações abaixo, o terceiro quartil, Q3, deixa 75% das observações abaixo.
 
-<p align="center">
-![](figuras\img_quartis.png){ width=60% }</p>
-</p>
+
+```{r}
+#| echo: false
+#| fig-cap: "Quartis da distribuição"
+#| label: fig-quartis
+#| fig-align: center
+
+knitr::include_graphics("figuras/img_quartis.png")
+```
+
 
 Os **decis (D1, D2, ..., D9)** dividem os dados em dez partes (cada parte tem 10% dos dados).
 
@@ -129,20 +150,69 @@ Os **percentis (P1, P2, ..., P99)** dividem os dados em centésimas partes (cada
 
 **Assimetria** é uma medidade de assimetria da distribuição.
 
-<p align="center">![](figuras\img_skewness.png){ width=80% }</p>
+```{r}
+#| echo: false
+#| fig.hight: 3
+#| fig.width: 9
+#| fig.cap: "Assimetria"
+#| label: "fig-assimetria"
 
-<br><br>
+set.seed(2107)
+
+# Distribuição assimétrica (à esquerda)
+x_left <- rbeta(1000, 50, 2) * 10
+
+# Espelho perfeito (à direita)
+x_right <- max(x_left) - x_left
+
+# Dois gráficos lado a lado
+par(mfrow = c(1, 2))
+
+# Painel da esquerda — assimetria à esquerda
+hist(x_left, breaks = 30, col = "grey", border = "white",
+     main = "Assimetria negativa (esquerda)", freq = FALSE, xlab = "",
+     axes = FALSE, ylab = "")
+lines(density(x_left), col = "red", lwd = 1.5)
+
+# Painel da direita — espelho (assimetria à direita)
+hist(x_right, breaks = 30, col = "grey", border = "white",
+     main = "Assimetria positiva (direita)", freq = FALSE, xlab = "",
+     axes = FALSE, ylab = "")
+lines(density(x_right), col = "red", lwd = 1.5)
+```
+
+
+<br>
 **Curtose** é uma medida que caracteriza o achatamento da distribuição de frequência em relação à curva normal padrão (Gauss).
 
-```{r, echo=FALSE}
-x <- seq(-3,3, length=100)
+```{r}
+#| echo: false
+#| fig.cap: "Curtose"
+#| label: "fig-curtose"
 
-plot(function(x) dnorm(x, 0,.8),-4,4, ylim=c(0,.5),col=3, xaxt="n",yaxt="n",ann=FALSE)
-plot(function(x) dnorm(x,  0,1.3),-4,4, add=T,col=2)
-plot(function(x) dnorm(x, 0,1),-4,4, add=T,col=1)
-legend(1.8,0.5,c("Leptocúrtica","Mesocúrtica","Plantocúrtica"), bty = "n", pch=20 , col=c(3,1,2), text.col = "black", cex=1.2, pt.cex=3)
-title("Curtose")
+
+# Curvas de curtose
+plot(function(x) dnorm(x, 0, .8), -4, 4,
+     ylim = c(0, .5),
+     col = "#1B9E77", lwd = 3,
+     xaxt = "n", yaxt = "n", ann = FALSE,
+     bty = "n")
+
+plot(function(x) dnorm(x, 0, 1.3), -4, 4,
+     add = TRUE, col = "#D95F02", lwd = 3)
+
+plot(function(x) dnorm(x, 0, 1), -4, 4,
+     add = TRUE, col = "#7570B3", lwd = 3)
+
+legend(1.8, 0.5,
+       legend = c("Leptocúrtica", "Mesocúrtica", "Platicúrtica"),
+       col = c("#1B9E77", "#7570B3", "#D95F02"),
+       pch = 15, pt.cex = 2,
+       bty = "n", cex = 1.2)
+
+#title("Curtose", cex.main = 1.6)
 ```
+
 
 Vamos analisar os dados de experimentos de tempo de vida útil de baterias em anos que estão no documento "bateria.RData". Iniciamos importando os dados e examinado o objeto baterias que é um data frame que possui uma variável denominada vida_util, com 40 observações.
 
@@ -158,7 +228,9 @@ str(bateria) # Estrutura resumida
 
 Pode-se iniciar a análise examinando as estatísticas mais básicas como o comando `summary()`.
 
-```{r, warning=FALSE}
+```{r}
+#| warning: false
+
 # Estatisticas descritivas
 
 summary(bateria)
@@ -166,35 +238,40 @@ summary(bateria)
 
 Contudo, talvez possamos preferir uma tabela personalizada de estatísticas, podendo inclusive gerar um data.frame que conterá nossas estatísticas. Para tanto, utilizaremos o comando `rbind()` que organiza nossos objetos em linhas (o `cbind()` organiza em colunas).
 
-```{r, warning=FALSE}
-# estatísticas uma a uma
-n<-length(bateria$vida_util) # No de obs.
+```{r}
+#| warning: false
+
+n <- length(bateria$vida_util) # No de obs.
 xbar <- mean(bateria$vida_util) # média
 md <- median(bateria$vida_util) # Mediana
 var <- var(bateria$vida_util) #variância
 s <- sd(bateria$vida_util)  # desvio-padrão
 cv <- s/xbar*100 # Coeficiente de variação
-ep<-s/sqrt(n) # erro-padrão
-min.X<-min(bateria$vida_util)
-max.X<-max(bateria$vida_util)
+ep <- s/sqrt(n) # erro-padrão
+min.X <- min(bateria$vida_util)
+max.X <- max(bateria$vida_util)
   
 library(e1071)
-skew.X<-skewness(bateria$vida_util)
-kur.X<-kurtosis(bateria$vida_util)
+skew.X <- skewness(bateria$vida_util)
+kur.X <- kurtosis(bateria$vida_util)
 # Tabela com estatísticas descritivas
-vida.desc<-rbind(n,xbar, md,s,var,s, cv, ep, min.X,max.X, skew.X,kur.X) # em linhas
-colnames(vida.desc)<- c("estatísticas")
+vida.desc <- rbind(n,xbar, md,s,var,s, cv, ep, min.X,max.X, skew.X,kur.X) # em linhas
+colnames(vida.desc) <- c("estatísticas")
 vida.desc
 
 quantile(bateria$vida_util)
 ```
 
-```{r, echo=F}
+```{r}
+#| echo: false
+#| fig.cap: "Observações dos tempos de vida útil de baterias em anos"
+#| label: "fig-strip"
+#| 
 stripchart(bateria$vida_util, 
            method = "stack", 
            at = .1, 
            pch = 19)
-title(main = "observações dos tempos de vida útil de baterias em anos", xlab ="anos")
+title(xlab ="anos")
 
 text(xbar, 1.0, "me")
 arrows(xbar,.95,xbar,.4,length=.1, col = "red")
@@ -202,6 +279,7 @@ arrows(xbar,.95,xbar,.4,length=.1, col = "red")
 text(md, 0.85, "md")
 arrows(md,.8,md,.4,length=.1, col = "blue")
 ```
+
 
 ## Gráficos
 
@@ -212,34 +290,79 @@ $$Linf=q1-1,5IQR$$
 $$Lsup=q3+1,5IQR$$
 
 
-```{r, echo=FALSE}
-load("bateria.RData") # carregar dados em .RData
-grafico <- boxplot(bateria$vida_util,yaxt="n")
-boxplot(bateria$vida_util,yaxt="n")
-title(main="Boxplot")
+```{r}
+#| echo: false
+#| fig.cap: "Boxplot"
+#| label: "fig-boxplot"
 
-text(0.55, grafico$stats[1], "Lim. inferior", cex = 0.9, col="red")
-arrows(0.65,grafico$stats[1], 0.78,grafico$stats[1],col="red",length=.1,angle=25)
-text(0.55, grafico$stats[2], "1o Quartil", cex = 0.9, col="red")
-arrows(0.65,grafico$stats[2], 0.78,grafico$stats[2],col="red",length=.1,angle=25)
-text(0.55, grafico$stats[3], "Mediana", cex = 0.9, col="red")
-arrows(0.65,grafico$stats[3], 0.78,grafico$stats[3],col="red",length=.1,angle=25)
-text(0.55, grafico$stats[4], "3o Quartil", cex = 0.9, col="red")
-arrows(0.65,grafico$stats[4], 0.78,grafico$stats[4],col="red",length=.1,angle=25)
-text(0.55, grafico$stats[5], "Lim. superior", cex = 0.9, col="red")
-arrows(0.65,grafico$stats[5], 0.78,grafico$stats[5],col="red",length=.1,angle=25)
-text(0.70, grafico$out[1], "Outlier", cex = 0.9, col="red")
-arrows(0.80,grafico$out[1], 0.93,grafico$out[1],col="red",length=.1,angle=25)
-text(0.70, grafico$out[2], "Outlier", cex = 0.9, col="red")
-arrows(0.80,grafico$out[2], 0.93,grafico$out[2],col="red",length=.1,angle=25)
 
-text(1.28, (grafico$stats[2]+grafico$stats[4])/2, "IQR", cex = 0.9, col="red")
-arrows(1.22,grafico$stats[2],1.22,grafico$stats[4],col="red",length=.1,angle=25,code = 3)
+load("bateria.RData")   # carregar dados
+
+lab.size <- 0.9
+
+# Fonte mais bonita
+par(family = "serif", font = 3)   # serif + itálico
+par(mai = c(0.8, 0.6, 0.6, 0.4))  # margens mais equilibradas
+
+
+grafico <- boxplot(bateria$vida_util,
+                   yaxt = "n",
+                   col = "#E8E8E8",
+                   border = "#555555",
+                   boxwex = 0.4)
+
+#title(main = "Boxplot", cex.main = 1.6)
+
+# ---- Anotações ----
+
+# Limite inferior
+text(0.55, grafico$stats[1], "Lim. inferior", cex = lab.size)
+arrows(0.65, grafico$stats[1], 0.80, grafico$stats[1],
+       length = .1, angle = 20)
+
+# 1º quartil
+text(0.55, grafico$stats[2], "1º Quartil", cex = lab.size)
+text(0.55, grafico$stats[2] - 0.15, "(25%)", cex = lab.size)
+arrows(0.65, grafico$stats[2], 0.80, grafico$stats[2],
+       length = .1, angle = 20)
+
+# Mediana
+text(0.55, grafico$stats[3], "Mediana", cex = lab.size)
+text(0.55, grafico$stats[3] - 0.15, "(50%)", cex = lab.size)
+arrows(0.65, grafico$stats[3], 0.80, grafico$stats[3],
+       length = .1, angle = 20)
+
+# 3º quartil
+text(0.55, grafico$stats[4], "3º Quartil", cex = lab.size)
+text(0.55, grafico$stats[4] - 0.15, "(75%)", cex = lab.size)
+arrows(0.65, grafico$stats[4], 0.80, grafico$stats[4],
+       length = .1, angle = 20)
+
+# Limite superior
+text(0.55, grafico$stats[5], "Lim. superior", cex = lab.size)
+arrows(0.65, grafico$stats[5], 0.80, grafico$stats[5],
+       length = .1, angle = 20)
+
+# Outliers
+for (i in seq_along(grafico$out)) {
+  text(0.75, grafico$out[i], "Outlier", cex = lab.size)
+  arrows(0.82, grafico$out[i], 0.95, grafico$out[i],
+         length = .1, angle = 20)
+}
+
+# IQR
+text(1.25, mean(grafico$stats[2:4]), "IQR", cex = lab.size)
+arrows(1.20, grafico$stats[2], 1.20, grafico$stats[4],
+       length = .1, angle = 20, code = 3)
+
 ```
 
 O boxplot dos 40 ensaios de vidas úteis de baterias pode ser gerado com o  comando `boxplot()`.
 
 ```{r}
+#| fig.cap: "Boxplot das observações de vidas úteis de baterias"
+#| label: "fig-boxplot_baterias"
+
 # gráficos
 boxplot(bateria$vida_util, 
         ylab='Vida útil (anos)',
@@ -252,7 +375,9 @@ O comando `points()` acrescenta o sinal "+" na posição da média, tornando o g
 
 As estatísticas utilizadas para a elaboração do boxplot podem ser acessadas. Para tanto, primeiramente, devem-se ser armazenadas num objeto que, neste exemplo, foi denominado meuBoxplot.
 
-```{r, results='hide',fig.show='hide'}
+```{r}
+#| results: "hide"
+#| fig.show: "hide"
 meuBoxplot<-boxplot(bateria$vida_util, ylab='Vida útil (anos)', las=1, col='Yellow')
 ```
 
@@ -265,29 +390,31 @@ meuBoxplot$out
 
 Uma maneira muito simples de identificar os *outliers* no boxplot é disponibilizado pelo comando `Boxplot()` (com B maiúsculo) do pacote `car`.
 
-```{r, warning=FALSE}
+```{r}
+#| warning: false
+#| fig.cap: "Boxplot com a identificão dos outliers"
+#| label: "fig-boxplot_out"
+
 library(car) # pacote car
 Boxplot(bateria$vida_util,
         ylab='Vida útil (anos)',
         col="yellow", 
         las=1)
-title(main="Boxplot com a identificão dos outliers")
+
 points(xbar, pch='+', cex=2, col="red") # média
 ```
-
-## Boxplot
-
-```{r}
-boxplot(bateria$vida_util)
-```
-
 
 Como se pode observar nos resultados do comando `Boxplot` e pelo gráfico, os tempos do 31o e do 10o ensaios de baterias são atípicos quando comparadas com os demais.
 
 ### Histograma
+
 **Histogramas** são gráficos de barras em que as barra representam a frequência dos dados e seus respectivos intervalos. Esses interlavos não se sobrepõem e são os gráficos que representam as tabelas de distribuição de frequências.
 
 ```{r}
+#| fig.cap: "Histograma das observações das vidas úteis de bateriais"
+#| label: "fig-hist_bateriais"
+
+
 hist(bateria$vida_util, col = "red")
 ```
 
@@ -335,11 +462,15 @@ Mostra a proporção das vezes em que uma variável aleatória discreta tende a 
 
 A altura de cada barra indica a probabilidade de ocorrência de um evento.
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig.cap: "distribuição de Probabilidade\nde uma cara no lançamento de duas moedas"
+#| label: fig-dist_freq_moedas
+
 x<-c(0.25,0.50,0.25)
 ncaras<-as.character(c(0,1,2))
 barplot(x, names.arg = ncaras, xlab="Nº de caras", ylab="Probabilidade", col = "red", space = 1.5)
-title(main = "distribuição de Probabilidade\nde uma cara no lançamento de duas moedas")
+#title(main = "distribuição de Probabilidade\nde uma cara no lançamento de duas moedas")
 abline(h=0)
 ```
 
@@ -350,7 +481,11 @@ A **distribuição de probabilidade** se baseia num modelo teórico e se conhece
 Observe o registro dos lançamentos de duas moedas jogadas 10 vezes. Os resultados se comportaram extamente igual aos da distribuição de probabilidades?
 
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig.cap: "Distribuição de frequências\nde uma cara em 10 lançamentos de duas moedas"
+#| label: fig-dist_freq_moedas10
+
 moedaReal<-rep(0:2, times=c(3,6,1))
 moedaReal.fa<-table(moedaReal)
 moedaReal.fr<-prop.table(moedaReal.fa) # freq.relativa
@@ -359,7 +494,7 @@ moedaReal.dist<-cbind("fa"=moedaReal.fa,"fr"=moedaReal.fr,"fp"=moedaReal.fp, "f.
 moedaReal.dist
 barplot(moedaReal.fr, names.arg = ncaras, xlab="No de caras", ylab="frequência", col = "red", space = 1.5)
 abline(h=0)
-title(main = "Distribuição de frequências\nde uma cara em 10 lançamentos de duas moedas")
+# title(main = "Distribuição de frequências\nde uma cara em 10 lançamentos de duas moedas")
 ```
 
 Agora veja os resultados de uma cara em 1.000 jogadas de duas moedas. A distribuição de frequências se parece mais com a distribuição de probabilidades?
@@ -432,7 +567,7 @@ tb.dist
 
 Determinado que  $k=9$ e $h=20$, gera-se a seguência de intervalos (*bins* = caixa em inglês) determndados pelas pontes de quebra. Depois os dados são classificados, ou cortados, em cada classe (*bins*) como o comando `cut()`, crinado assim um novo score. Com os comando `table()`, cria-se uma tabela de frequências absolutas, e, com o comando `prop.table`, uma tabela de frequências relativas.
 
-Para uma tabala de frequência personalizada, os recursos do comando `transform()` são muito convenientes por permitir o cálculo das colunas a partir dos valores da coluna inicial que será justamente a tabela de frequências acumuladas já criada previamente. A tabela resultante é esteticamente atraente e permite uma manipulação posterior fácil por ser um data.frame.
+Para uma tabela de frequência personalizada, os recursos do comando `transform()` são muito convenientes por permitir o cálculo das colunas a partir dos valores da coluna inicial que será justamente a tabela de frequências acumuladas já criada previamente. A tabela resultante é esteticamente atraente e permite uma manipulação posterior fácil por ser um data.frame.
 
 Caso se deseje criar uma tabela com a classes iguais ao padrão dos histogramas do R.
 
@@ -441,11 +576,14 @@ Caso se deseje criar uma tabela com a classes iguais ao padrão dos histogramas 
 O histograma pode ser criado automaticamente como o comando `hist()` e personalizado, ajustando seus vários argumentos. O argumento `right=FALSE`, ajuste os intervalos a serem fechados a esquerda e abertos à direita, apesar que em distribuições com muitos dados, como esta, isso não faça muita diferença, mas será importante para casos com poucos dados ou quando a primeira classe incia no valor mínimo ou última se termina no valor máximo dos dados.
 
 ```{r}
+#| fig.cap: "Histograma com No e intervalos de classes sugeridos pelo R"
+#| label: fig-hist_base_col
+
 hist(dadosForca$forca,
      right = FALSE, 
      col = "chocolate",
      border = "brown",
-     main = "Histograma com No e intervalos de classes sugeridos pelo R")
+     main = "")
 ```
 
 Para se obter os parâmetros do histograma padrão do R, basta o salvar num objeto e exibir, como demonstraado abaixo:
@@ -460,18 +598,23 @@ meuHist$breaks # Limites das classes
 
 ### Criando histogramas personalizados
 
-```{r, warning=FALSE}
+```{r}
+#| warning: false
+#| fig.cap: "Histograma Personalizado"
+#| label: fig-hist_personalizado
+
+
 par.copy<-par() # guarda default
-par(bg="lightgrey")
+par(bg="grey90")
 
 hist(dadosForca$forca, 
      breaks = c(bins),
      right = FALSE, 
-     col="darkslategray4",
+     col="steelblue",
      border="white",
      xaxt="n",
      xlab = expression(lbf/pol^2),
-     main="Histograma Personalizado")
+     main="")
 
 axis(1, at=c(bins), 
      labels=bins, 
@@ -487,6 +630,9 @@ par(par.copy) # Reestabelece as configuracoes originais
 No histograma a seguir, há duas novidades. O uso de tons vermelhos para as nove colunas e a utilização dos intervalos em substituição aos limites de classe no rótulos do eixo de x com uma inclinação de 45$^O$.
 
 ```{r}
+#| fig.cap: "Histograma com paleta e rótulos inclinados"
+#| label: fig-hist_inclinado
+
 library(RColorBrewer) # pacote de Cores
 cols<-brewer.pal(9,"Reds")
 hist(dadosForca$forca, breaks = c(bins),right = F, col=cols, xaxt="n")
@@ -499,7 +645,10 @@ O pacote `RColorBrewer()` disponibiliza vários esquemas de tons de cores. Para 
 Para personalizar o gráfico, o histograma é inicialmente gerado sem os eixo horizontal, argumento `xaxt="n"`. Usam-se os valores das classe armazenadas na coluna socres do objeto **tb.dist** para os rótulos, `labels = tb.dist$scores`.
 
 
-[//]: # http://sphaerula.com/legacy/R/placingTextInPlots.html
+<!-- 
+http://sphaerula.com/legacy/R/placingTextInPlots.html
+-->
+
 
 ### Exercício
 
@@ -510,16 +659,33 @@ Para personalizar o gráfico, o histograma é inicialmente gerado sem os eixo ho
 
 A **densidade**, numa distribuição contínua, é a medida de probabilidade de se obter um número próximo a $x$. Para distribuições discretas, a densidade é a probabilidade de obter exatamente um determinado valor, já que corresponde a uma contagem.
 
-<p align="center">![](figuras\img_graus.png){ width=50% }</p>
+
+```{r}
+#| echo: false
+#| fig-cap: "Roleta de graus"
+#| label: fig-graus
+#| fig-align: center
+
+knitr::include_graphics("figuras/img_graus.png")
+```
+
+
 
 ```{r}
 roleta<-seq(from=0, to=360,by=1)
 range(roleta)
 ```
 
+```{r}
+#| echo: false
+#| fig-cap: "Probabilidade de graus"
+#| label: fig-prob_graus
+#| fig-align: center
 
-<p align="center">
-![](figuras\probRoleta1.png){ width=60% }</p>
+knitr::include_graphics("figuras/probRoleta1.png")
+```
+
+
 
 ```{r eval=FALSE, include=FALSE}
 prob.roleta<-rep(1,length(roleta))/max(roleta)
@@ -534,13 +700,21 @@ box()
 $f(x)$ é a densidade.
 $$f(x)=\frac{1}{360}$$
 
+```{r}
+#| echo: false
+#| fig-cap: "Probabilidade de um valor num intervalo"
+#| label: fig-prob_intervalo
+#| fig-align: center
+```
 
-<p align="center">
-![](figuras\probRoleta2.png){ width=60% }</p>
 
 
+```{r}
+#| eval: false
+#| warning: false
+#| include: false
 
-```{r eval=FALSE, warning=FALSE, include=FALSE}
+
 colors_1<-rgb(0.2,0.5,0.5,0.2) #verde
 
 plot(roleta,prob.roleta, type = "l", xlim=c(0,length(roleta)), xaxs="i",yaxt="n",xlab = "Valores",ylab = "f(x)")
@@ -565,6 +739,7 @@ text(90+(180-90)/2,1/length(roleta), TeX("$P \\left[ 90 \\leq X \\leq 180 \\righ
 $$P[90\leq X \leq 180]= \int_{90}^{180} f(x)dx=\int_{90}^{180} \frac{1}{360} dx=0.25$$
 
 
+
 # A distribuição Normal
 
 ## A características da curva normal
@@ -578,32 +753,45 @@ $$P[90\leq X \leq 180]= \int_{90}^{180} f(x)dx=\int_{90}^{180} \frac{1}{360} dx=
 7. Área entre a média e um ponto arbitrário é função do número dos desvios padrões entre a média e aquele ponto.
 
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Distribuição (Curva) Normal"
+#| label: fig-dist_normal
+#| fig-align: center
+
 x <- seq(-4, 4, by=0.1) # Serie de x
 y <-dnorm(x,mean=0,sd=1) # y como densidade de x
-plot(x, y, main="distribuição (Curva) Normal",xlab="",ylab="",type="l",yaxt="n", xaxt='n', col="blue",lwd=2,frame.plot=FALSE)
+plot(x, y,xlab="",ylab="",type="l",yaxt="n", xaxt='n', col="blue",lwd=2,frame.plot=FALSE)
 axis(1, at=-4:4, labels=c("",paste(-3:-1, "s", sep=""),expression(bar(x)),paste(1:3, "s", sep=""),""))
 text(-3.5,.03,expression(-infinity), cex = 1.5)
 text(3.5,.03,expression(+infinity), cex = 1.5)
 ```
 
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Distribuição de QI"
+#| label: fig-dist_qi
+#| fig-align: center
+
 x <- seq(55, 145) # Serie de x
 y <-dnorm(x,mean=100,sd=15) # y como densidade de x
-plot(x, y, main="distribuição de QI",xlab="",ylab="",type="l",yaxt="n",xaxt="n", col="blue",lwd=2,frame.plot=FALSE)
+plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n", col="blue",lwd=2,frame.plot=FALSE)
 axis(side = 1, at = c(seq(55,145, by=15)))
 text(130,0.02,"N(100,225)")
 ```
 
 
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Área do lado direito da curva normal"
+#| label: fig-area_curva_direto
+#| fig-align: center
 
 x <- seq(-4, 4, by=0.1) # Serie de x
 y <-dnorm(x,mean=0,sd=1) # y como densidade de x
 plot(x, y,xlab="",ylab="",type="l",yaxt="n", xaxt='n', col="blue",lwd=1,frame.plot=FALSE)
-title(main="Área do lado direito da curva normal")
 axis(1, at=-4:4, labels=c("",paste(-3:-1, "s", sep=""),expression(bar(x)),paste(1:3, "s", sep=""),""))
 
 
@@ -647,11 +835,15 @@ arrows(0, dnorm(1,0,1), 1, dnorm(1,0,1), col = "red", length=.1,angle=25)
 
 ```
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Área total sob a curva normal"
+#| label: fig-area_curva
+#| fig-align: center
 
 x <- seq(-4, 4, by=0.1) # Serie de x
 y <-dnorm(x,mean=0,sd=1) # y como densidade de x
-plot(x, y, main="Área total sob a curva normal",xlab="",ylab="",type="l",yaxt="n", xaxt='n', col=1,lwd=1,frame.plot=FALSE)
+plot(x, y,xlab="",ylab="",type="l",yaxt="n", xaxt='n', col=1,lwd=1,frame.plot=FALSE)
 axis(1, at=-4:4, labels=c("",paste(-3:-1, "s", sep=""),expression(bar(x)),paste(1:3, "s", sep=""),""))
 
 
@@ -712,21 +904,33 @@ arrows(.5, dnorm(1,0,1), 1, dnorm(1,0,1), col = "red", length=.1,angle=25)
 
 ## A Curva Normal Padronizada
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Curvas Normais"
+#| label: fig-curvas_normais
+#| fig-align: center
+
 x <- seq(-3,3, length=100)
-plot(function(x) dnorm(x, 0,1),-4,4, ylab = "f(x)", xlab="")
-plot(function(x) dnorm(x,  0,1.3),-4,4, add=T,col=2)
-plot(function(x) dnorm(x, 1,1),-4,4, add=T,col=3)
+plot(function(x) dnorm(x, 0,1),-4,4, ylab = "f(x)", xlab="", col = "#7570B3", lwd = 3)
+plot(function(x) dnorm(x,  0,1.3),-4,4, add=T, col = "#D95F02", lwd = 3)
+plot(function(x) dnorm(x, 1,1),-4,4, add=T, col = "#1B9E77", lwd = 3)
 axis(side = 1, at = c(-4:4))
 #legend(120,0.05,c("N(100,64)","N(90,64)","N(100,225)"),fill=1:3, bty = "n", pch=20,pt.cex=3)
-legend(2.5,0.35,c("N(0,1)","N(0,1.3)","N(1,1)"), bty = "n", pch=20 , col=1:4, text.col = "black", cex=1.2, pt.cex=3)
-title("Várias curvas normais")
+legend(2.5,0.35,c("N(0,1)","N(0,1.3)","N(1,1)"), bty = "n", pch=15 ,
+       col = c("#7570B3", "#D95F02", "#1B9E77"),
+       text.col = "black", cex=1.2, pt.cex=3)
 ```
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Curva Normal Padronizada"
+#| label: fig-curva_pad
+#| fig-align: center
+
+
 x <- seq(-4, 4, by=0.1) # Serie de x
 y <-dnorm(x,mean=0,sd=1) # y como densidade de x
-plot(x, y, main="Curva Normal Padronizada",xlab="",ylab="",type="l",yaxt="n", xaxt='n', col="blue",lwd=2,frame.plot=FALSE)
+plot(x, y,xlab="",ylab="",type="l",yaxt="n", xaxt='n', col = "blue", lwd = 3,frame.plot=FALSE)
 axis(1, at=-4:4, labels=c("",paste(-3:-1, "s", sep=""),0,paste(1:3, "s", sep=""),""))
 text(2.5,.3,"N(0,1)")
 text(-3.5,.03,expression(-infinity), cex = 1.5)
@@ -737,24 +941,35 @@ text(3.5,.03,expression(+infinity), cex = 1.5)
 $$z=\frac{x_i-\bar{x}}{\sigma}$$
 
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Distribuição de QI e os valores padronizados"
+#| label: fig-prob_dist_qi_z
+#| fig-align: center
+
+
 x <- seq(55, 145) # Serie de x
 y <-dnorm(x,mean=100,sd=15) # y como densidade de x
-plot(x, y, main="distribuição de QI",xlab="",ylab="",type="l",yaxt="n",xaxt="n", col="blue",lwd=1,frame.plot=FALSE)
+plot(x, y, xlab="",ylab="",type="l",yaxt="n",xaxt="n", col = "blue", lwd = 3,frame.plot=FALSE)
 axis(side = 1, at = c(seq(55,145, by=15)))
 axis(side = 1, at = c(seq(55,145, by=15)), labels=c(paste(-3:-1, "s", sep=""),0,paste(1:3, "s", sep="")), line=3)
 mtext("Escala\nEfetiva",1,line=0,at=45,col="blue", cex=.8)
 mtext("Escala\nPadronizada",1,line=3,at=45,col="blue", cex=.8)
 ```
 
+
 ## Distribuição *t*
 
 Quando o desvio padrão $\sigma$ é desconhecido e substituido por sua estimativa $s$, os valores padronizados deixam de seguir a distribuição normal padronizada devido ao pertubação provocada pela incerteza. William Sealy Gosset, sob o pseudônimo "Student" derivou o que que ficou conhecido como distribuição t, muito útil em pequenas amostras.
 
-```{r, echo=FALSE}
-curve(dnorm(x), -4, 4, col = "blue", xlab = "",ylab = "")
-curve(dt(x, df = 3), add = TRUE)
-title("Comparação entre a curva padrão e distribuição t com 3 gl")
+```{r}
+#| echo: false
+#| fig-cap: "Comparação entre a curva padrão e distribuição t com 3 gl"
+#| label: fig-t_normal
+#| fig-align: center
+
+curve(dnorm(x), -4, 4, col = "blue", xlab = "",ylab = "", lwd = 3, lty = 2)
+curve(dt(x, df = 3), add = TRUE, lwd = 3, col = "blue")
 ```
 
 A distribuição t se trata de uma família de distribições descritas pelos graus de liberdade (gl).  Os gl são definidos como $n-1$, na qual $n$ é o número de observações da amostra.
@@ -779,12 +994,17 @@ Exemplos de estimativas
 |Proporção|A proporção de estudantes fumantes é de 43%|A proporção de estudantes fumantes está entre 37% a 49%|
 
 
-
-
-
 ### O conceito de intervalo de estimação
 
-<p align="center">![](figuras\img_ic_conceito.png){ width=50% }</p>
+```{r}
+#| echo: false
+#| fig-cap: "População e amostra"
+#| label: fig-ic_conceito
+#| fig-align: center
+
+knitr::include_graphics("figuras/img_ic_conceito.png")
+```
+
 
 > Independentemente do nível de confiança que adotemos, ainda não podemos dizer se determinada média amostral é menor, ou maior, do que o valor desconhecido populacional. Como não há maneira de saber ao certo, admitimos o pior e construimos um intervalo de valores verdadeiros possíveis.
 >
@@ -799,7 +1019,17 @@ Exemplos de estimativas
  - Para a determinação do intertelo no qual deve estar o pâmetro populacional, é necessário a estimação de duas estatísticas, o limite inferior (LI) e o limite superior do intervalo (LS).
  - **Erro de estimação**: diferença (desvio) entre a média amostral e a verdadeira média populacional.
 
-<p align="center">![](figuras\img_ic.png){ width=40% }</p>
+
+```{r}
+#| echo: false
+#| fig-cap: "Intervalo de confiança"
+#| label: fig-ic.png
+#| fig-align: center
+
+knitr::include_graphics("figuras/img_ic.png")
+```
+
+
 
 
 $$IC=\bar{x}\pm erro$$
@@ -865,11 +1095,16 @@ $$H_1:\mu \neq 3,5\text{ anos}$$
 > -- <cite>Hines, et al. (2011), p. 238</cite>
 
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Teste de hipótese bicaudal"
+#| label: fig-h_bi
+#| fig-align: center
+
 x <- seq(-4, 4, by=0.1) # Serie de x
 y <-dnorm(x,mean=0,sd=1) # y como densidade de x
 plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
-title(main="Teste de hipótese bicaudal")
+# title(main="Teste de hipótese bicaudal")
 Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
 text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
 mtext(expression("nível de significância (" * alpha==0.05 *")"),side=3,line=0.5,at=0,col="blue", cex=1)
@@ -895,9 +1130,14 @@ mtext("Valor\ncrítico",1,line=1,at=-1.96,col="blue", cex=.8)
 mtext("Valor\ncrítico",1,line=1,at=1.96,col="blue", cex=.8)
 ```
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Teste de hipótese unicaudal à esquerda"
+#| label: fig-h_un_esquerda
+#| fig-align: center
+
 plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
-title(main="Teste de hipótese unicaudal à direita")
+# title(main="Teste de hipótese unicaudal à direita")
 Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
 text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
 mtext(expression("nível de significância (" * alpha==0.05 *")"),side=3,line=0.5,at=0,col="blue", cex=1)
@@ -913,7 +1153,7 @@ mtext("Valor\ncrítico",1,line=1,at=1.644854,col="blue", cex=.8)
 mtext("Regra de decisão: t calculado > t tabelado", side=1, line=2, at=0, col="blue", cex=.9)
 
 plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
-title(main="Teste de hipótese unicaudal à esquerda")
+#title(main="Teste de hipótese unicaudal à esquerda")
 Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
 text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
 mtext(expression("nível de significância (" * alpha==0.05 *")"),side=3,line=0.5,at=0,col="blue", cex=1)
@@ -929,6 +1169,7 @@ mtext("Valor\ncrítico",1,line=1,at=-1.644854,col="blue", cex=.8)
 mtext("Regra de decisão: t calculado < t tabelado", side=1, line=2, at=0, col="blue", cex=.9)
 ```
 
+
 ## Tipos de erros em um teste de hipóteses
 
 <p align="center"> ![](figuras\errosTipo.png){ width=40% } </p>
@@ -936,7 +1177,16 @@ mtext("Regra de decisão: t calculado < t tabelado", side=1, line=2, at=0, col="
 
 Tendo em vista que o teste de hipóteses é baseado em estatísticas amostrais, as decisões são sujeitas a erros de dois tipos.
 
-<p align="center"> ![](figuras\img_erro_tipo.png){ width=40% } </p>
+```{r}
+#| echo: false
+#| fig-cap: "Tipos de erros"
+#| label: fig-erro_tipo.png
+#| fig-align: center
+
+knitr::include_graphics("figuras/img_erro_tipo.png")
+```
+
+
 
   - O **erro tipo I** é a rejeição da hipótese nula quando ela é verdadeira, também denominado **falso positivo**. A probabilidade de cometê-lo é denominado *nível de significância* ($\alpha$) ou *tamanho do teste*.
    $$\alpha=P(H_0\text{ é rejeitada }|H_0\text{ é verdeira})$$
@@ -954,11 +1204,17 @@ O valor-p pode ser definido como o nível de significância exato "de a hipótes
  - Se o valor-p for $<\alpha$,  rejeita-se $H_0$. 
  - Geralmente, rejeita-se $H_0$ quando Valor-P $<0,05$.
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
+#| fig-cap: "Interpretação gráfica do Valor P"
+#| label: fig-valor_p
+#| fig-align: center
+
+
 x <- seq(-4, 4, by=0.1) # Serie de x
 y <-dnorm(x,mean=0,sd=1) # y como densidade de x
 plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
-title(main="Interpretação gráfica do Valor P")
+#title(main="Interpretação gráfica do Valor P")
 Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
 
 text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
@@ -991,8 +1247,6 @@ $$p<.01$$
 $$p<.001$$
 
 Todavia quando $p>.05$, reporta-se somente $n.s.$, do inglês *non-significant*.
-
-
 
 
 ## Teste de hipótese para uma amostra (variância desconhecida)
@@ -1083,10 +1337,26 @@ Muitos testes estatísticos supõem que a distribuição da amostra siga uma dis
 ### Análise gráfica da normalidade
 
 ```{r}
+#| fig-cap: "Observações das vidas úteis de 40 baterias"
+#| label: fig-plot_baterias
+#| fig-align: center
+
 plot(bateria$vida_util)
 abline(h=mean(bateria$vida_util),col="blue",lty = 2) # linha horiz. na média
+```
+
+```{r}
+#| fig-cap: "Densidade"
+#| label: fig-dessidade
+#| fig-align: center
 
 plot(density(bateria$vida_util))
+```
+
+```{r}
+#| fig-cap: "QQplots - vida útteis de baterias"
+#| label: fig-qqp_baterias
+#| fig-align: center
 
 par(mfrow=c(1,2)) # Divide a janela graf.
 qqnorm(bateria$vida_util,las=1)
@@ -1094,21 +1364,31 @@ qqline(bateria$vida_util) # Ajuste a normalidade
 
 qqnorm(scale(bateria$vida_util))
 qqline(scale(bateria$vida_util))
+
+par(mfrow=c(1,2)) # janela graf normal.
 ```
 
 ```{r}
+#| fig-cap: "Histograma sobreposto pela curva normal"
+#| label: fig-hist_curva
+#| fig-align: center
+
 # Histograma
 hist(bateria$vida_util,
      freq=FALSE, 
      main = "Histograma sobreposto pela curva normal")
 curve(dnorm(x, mean=mean(bateria$vida_util), sd=sd(bateria$vida_util)), col="darkblue", lwd=2, add=TRUE, yaxt="n")
+```
 
-
+```{r}
+#| fig-cap: "Histograma padronizado, densidade empírica vs curva normal"
+#| label: fig-hist_curva_pad
+#| fig-align: center
 
 # Histograma padronizado, densidade empírica vs curva normal.
 hist(scale(bateria$vida_util), las=1, ylim=c(0,.7), freq=FALSE, main = NULL)
 curve(dnorm(x), add=TRUE, col='blue', lwd=2)
-title("Histograma padronizado, densidade empírica vs curva normal")
+# title("Histograma padronizado, densidade empírica vs curva normal")
 lines(density(scale(bateria$vida_util)), col='red')
 legend(.5,0.7, c("Dens. teórica","Dens. empírica"), fill=c("blue", "red"),box.col=0, border = c("blue", "red"),horiz=F)
 ```
@@ -1219,28 +1499,57 @@ points(1:2, y.means, pch = 23, bg = "yellow", cex = 1.5)
 Verificação gráfica da normalidade dos dados
 
 ```{r}
+#| echo: false
+#| fig-cap: "QQplot Argamassa"
+#| label: fig-qqp_argamassa
+#| fig-align: center
+
 ### Verificação Gráfica da Normalidade
 
+par(mfrow = c(1, 2))   # 1 linha, 2 colunas
+
 qqnorm(dados$resp[dados$argamassa == "Modificado"],
-       main = "Modificado - Normal Q-Q plot")
+       main = "Modificada")
 qqline(dados$resp[dados$argamassa == "Modificado"])
 
 qqnorm(dados$resp[dados$argamassa == "NaoMod"],
-       main = "NaoMod - Normal Q-Q plot")
+       main = "NaoMod")
 qqline(dados$resp[dados$argamassa == "NaoMod"])
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "QQplot Argamassa - dados padronizados"
+#| label: fig-qqp_argamassa_pad
+#| fig-align: center
 
 # Valores padronizados
-qqnorm(scale(dados$resp[dados$argamassa == "Modificado"]), main="Modificada padronizada - Normal Q-Q plot"); qqline(scale(dados$resp[dados$argamassa == "Modificado"]))
+par(mfrow = c(1, 2))   # 1 linha, 2 colunas
 
-qqnorm(scale(dados$resp[dados$argamassa == "NaoMod"]),main="NaoMod padronizada - Normal Q-Q plot"); qqline(scale(dados$resp[dados$argamassa == "NaoMod"]))
+qqnorm(scale(dados$resp[dados$argamassa == "Modificado"]), main="Modificada"); qqline(scale(dados$resp[dados$argamassa == "Modificado"]))
+
+qqnorm(scale(dados$resp[dados$argamassa == "NaoMod"]),main="NaoMod"); qqline(scale(dados$resp[dados$argamassa == "NaoMod"]))
+```
+
+```{r}
+#| fig-cap: "Histograma de Argamassa Modificada"
+#| label: fig-hist_mod
+#| fig-align: center
+
 
 # Histogramas
-hist(scale(dados$resp[dados$argamassa == "Modificado"]), freq=FALSE, main = "Histograma de Argamassa Modificada")
+hist(scale(dados$resp[dados$argamassa == "Modificado"]), freq=FALSE, xlab = "Resistência", main = "")
 curve(dnorm(x), add=TRUE, col=2); lines(density(scale(dados$resp[dados$argamassa == "Modificado"])), col=3)
 legend(.5,0.6, c("Dens. teórica","Dens. empírica"), fill=c("red", "green"),box.col=0, horiz=F )
 
+```
 
-hist(scale(dados$resp[dados$argamassa == "NaoMod"]), freq=FALSE, main = "Histograma de Argamassa Não Modificada")
+```{r}
+#| fig-cap: "Histograma de Argamassa Não Modificada"
+#| label: fig-hist_nmod
+#| fig-align: center
+
+hist(scale(dados$resp[dados$argamassa == "NaoMod"]), freq=FALSE, xlab = "Resistência", main = "")
 curve(dnorm(x), add=TRUE, col=2); lines(density(scale(dados$resp[dados$argamassa == "NaoMod"])), col=3)
 legend(-2,0.4, c("Dens. teórica","Dens. empírica"), col=c("red", "green"),lty=c(1,1),box.col=0, horiz=F )
 ```
@@ -1364,4 +1673,8 @@ Portanto, a **rejeição** de $H_0$ pode ser observada de três maneiras:
  * O valor-P é menor do 0,05 (nível de significância);
  * O intervalo de confiança vai de -0.54507339 a -0.01092661, excluindo diferença zero do intervalo
  * O valor absoluto do valor t calculado da diferença entre as médias, $|t_0|=2,1869$, excede o valor crítico bicaudal que é 2,100922.
+
+
+
+
 
