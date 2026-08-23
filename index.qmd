@@ -1430,7 +1430,7 @@ lillie.test(bateria$vida_util) # Lilliefors
 Exemplo e dados obtidos em: 
 http://www.instantr.com/2012/12/29/performing-a-one-sample-t-test-in-r/
 
-As máquinas de uma fábrica devem envasar 500 ml de refrigerantes nas garrafas. Todavia, o fabricante suspeita que uma de suas máquinas está envasando um volume inferior de líquidos. Para investigar se a máquina está desrregulada, carregue o arquivo **bottles.txt** como o comando `read.table()`. Os dados são referentes a uma amostra aleatória de volumes de 20 garrafas de refrigerantes na máquina em suspeição e faça o que se pede:
+As máquinas de uma fábrica devem envasar 500 ml de refrigerantes nas garrafas. Todavia, o fabricante suspeita que uma de suas máquinas está envasando um volume inferior de líquidos. Para investigar se a máquina está desrregulada, carregue o arquivo [**bottles.txt**](bottles.txt) como o comando `read.table()`. Os dados são referentes a uma amostra aleatória de volumes de 20 garrafas de refrigerantes na máquina em suspeição e faça o que se pede:
 
 * Examine graficamente a normalidade da distribuição;
 * Teste a normalidade da distribuição empírica com o teste de Shapiro-Wilk;
