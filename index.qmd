@@ -46,7 +46,7 @@ $$\bar{x}=\dfrac{4+5+6}{3}=5$$
 #| label: fig-pop_amostra
 #| fig-align: center
 
-knitr::include_graphics("figuras/img_pop_amostra.png")
+knitr::include_graphics("Figuras/img_pop_amostra.png")
 ```
 
 
@@ -69,7 +69,7 @@ knitr::include_graphics("figuras/img_pop_amostra.png")
 #| label: fig-independentes
 #| fig-align: center
 
-knitr::include_graphics("figuras/img_independentes.png")
+knitr::include_graphics("Figuras/img_independentes.png")
 ```
 
 
@@ -80,7 +80,7 @@ knitr::include_graphics("figuras/img_independentes.png")
 #| label: fig-dependentes
 #| fig-align: center
 
-knitr::include_graphics("figuras/img_dependentes.png")
+knitr::include_graphics("Figuras/img_dependentes.png")
 ```
 
 
@@ -144,7 +144,7 @@ Os **quartis (Q1, Q2 e Q3)**: são valores que dividem a distribuição da amost
 #| label: fig-quartis
 #| fig-align: center
 
-knitr::include_graphics("figuras/img_quartis.png")
+knitr::include_graphics("Figuras/img_quartis.png")
 ```
 
 
@@ -459,7 +459,7 @@ Uma distribuição de probabilidade é uma distribuição de frequências relati
 
 Mostra a proporção das vezes em que uma variável aleatória discreta tende a assumir cada um dos diversos valores.
 
-![](figuras\img_moeda.png){ width=60% }
+![](Figuras\img_moeda.png){ width=60% }
 
 
 <br><br>
@@ -670,7 +670,7 @@ A **densidade**, numa distribuição contínua, é a medida de probabilidade de 
 #| label: fig-graus
 #| fig-align: center
 
-knitr::include_graphics("figuras/img_graus.png")
+knitr::include_graphics("Figuras/img_graus.png")
 ```
 
 
@@ -686,7 +686,7 @@ range(roleta)
 #| label: fig-prob_graus
 #| fig-align: center
 
-knitr::include_graphics("figuras/probRoleta1.png")
+knitr::include_graphics("Figuras/probRoleta1.png")
 ```
 
 
@@ -1006,7 +1006,7 @@ Exemplos de estimativas
 #| label: fig-ic_conceito
 #| fig-align: center
 
-knitr::include_graphics("figuras/img_ic_conceito.png")
+knitr::include_graphics("Figuras/img_ic_conceito.png")
 ```
 
 
@@ -1030,7 +1030,7 @@ knitr::include_graphics("figuras/img_ic_conceito.png")
 #| label: fig-ic.png
 #| fig-align: center
 
-knitr::include_graphics("figuras/img_ic.png")
+knitr::include_graphics("Figuras/img_ic.png")
 ```
 
 
