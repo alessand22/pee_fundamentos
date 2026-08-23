@@ -4,6 +4,8 @@ author:
   - name: "Alessandro de Castro Corrêa"
     email: alessandro.correa@ifpa.edu.br
     affiliations: Instituto Federal do Pará - IFPA
+date: "2026-08-23"
+date-format: "DD/MM/YYYY"
 lang: "pt"
 format:
   html:
@@ -20,6 +22,12 @@ resources:
 #csl: associacao-brasileira-de-normas-tecnicas-ipea.csl
 editor: source
 ---
+
+::: {.text-center}
+
+![Visitas](https://hits.sh/alessand22.github.io/pee_fundamentos.svg)
+
+:::
 
 # Termos Básicos
 
@@ -656,8 +664,8 @@ http://sphaerula.com/legacy/R/placingTextInPlots.html
 
 ### Exercício
 
- a) Elabore uma tabela de frequência para os dados dos experimentos de tempo de vida útil de baterias em anos que estão no documento "**bateria.RData**"; posteriormente um histograma personalizado a partir de sua tabela e o compare com o histograma gerado automaticamente pelo R.
- b) Elabore uma tabela de frequência para os dados dos experimentos de tempo de vida útil de baterias em anos que estão no documento "**bateria.RData**", utilizando os limites de classe do comando `hist()`. **Dica:** Salve o histograma num objeto. Os limites de classe estarão armazenados nos valores de `$breaks` desse objeto.
+ a) Elabore uma tabela de frequência para os dados dos experimentos de tempo de vida útil de baterias em anos que estão no documento [**bateria.RData**](bateria.RData); posteriormente um histograma personalizado a partir de sua tabela e o compare com o histograma gerado automaticamente pelo R.
+ b) Elabore uma tabela de frequência para os dados dos experimentos de tempo de vida útil de baterias em anos que estão no documento [**bateria.RData**](bateria.RData), utilizando os limites de classe do comando `hist()`. **Dica:** Salve o histograma num objeto. Os limites de classe estarão armazenados nos valores de `$breaks` desse objeto.
 
 ## Densidade
 
