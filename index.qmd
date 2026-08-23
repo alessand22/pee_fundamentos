@@ -218,7 +218,7 @@ legend(1.8, 0.5,
 ```
 
 
-Vamos analisar os dados de experimentos de tempo de vida útil de baterias em anos que estão no documento [**dadosConnepi.xlsx**](bateria.RData). Iniciamos importando os dados e examinado o objeto baterias que é um data frame que possui uma variável denominada vida_util, com 40 observações.
+Vamos analisar os dados de experimentos de tempo de vida útil de baterias em anos que estão no documento [**bateria.RData**](bateria.RData). Iniciamos importando os dados e examinado o objeto baterias que é um data frame que possui uma variável denominada vida_util, com 40 observações.
 
 ```{r}
 # Importação, preparação e inspeção
