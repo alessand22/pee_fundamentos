@@ -11,11 +11,15 @@ format:
     number-sections: true
     toc-location: left
     fig-cap-location: top
+    include-before-body: logo.html
+
+resources:
+  - Figuras/**
+
 #bibliography: referencias.bib
 #csl: associacao-brasileira-de-normas-tecnicas-ipea.csl
 editor: source
 ---
-
 
 # Termos Básicos
 
