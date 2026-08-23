@@ -1,5 +1,25 @@
-.Rproj.user
+# Histórico e arquivos de sessão do R
 .Rhistory
-.RData
 .Ruserdata
-.Rhistory
+
+# Configurações locais do RStudio
+.Rproj.user/
+
+# Versões antigas e backups
+*_antigo.Rmd
+*_antigo.qmd
+*_antigo.html
+*_backup.Rmd
+*_backup.qmd
+*_backup.html
+
+# Arquivos temporários
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+desktop.ini# Versões antigas e backups
+*_antigo.Rmd
+*_antigo.qmd
+*_antigo.html
