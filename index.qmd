@@ -1184,7 +1184,7 @@ mtext("Regra de decisão: t calculado < t tabelado", side=1, line=2, at=0, col="
 
 ## Tipos de erros em um teste de hipóteses
 
-<p align="center"> ![](figuras\errosTipo.png){ width=40% } </p>
+<p align="center"> ![](Figuras\errosTipo.png){ width=40% } </p>
 
 
 Tendo em vista que o teste de hipóteses é baseado em estatísticas amostrais, as decisões são sujeitas a erros de dois tipos.
@@ -1195,7 +1195,7 @@ Tendo em vista que o teste de hipóteses é baseado em estatísticas amostrais, 
 #| label: fig-erro_tipo.png
 #| fig-align: center
 
-knitr::include_graphics("figuras/img_erro_tipo.png")
+knitr::include_graphics("Figuras/img_erro_tipo.png")
 ```
 
 
