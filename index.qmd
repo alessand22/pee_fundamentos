@@ -1367,7 +1367,7 @@ $$p<.001$$
 Todavia quando $p>.05$, reporta-se somente $n.s.$, do inglês *non-significant*.
 
 
-## Teste T para uma amostra (variância desconhecida)
+# Teste T para uma amostra (variância desconhecida)
 
 Pode ocorrer que se esteja interessado em determinar se um atributo de uma amostra experimental é ou não igual a certo valor.
 
@@ -1380,7 +1380,7 @@ $$
 
 onde $\bar{x}$ é a média amostral e $\mu_0$ é uma constante.
 
-### Exemplo
+## Exemplo
 Após o registro de 40 ensaios (ou observações) do tempo de vida útil em anos de baterias, pretende-se decidir se a duração média é de 3,5 anos.
 
 $$H_0:\mu=3,5$$
@@ -1392,7 +1392,7 @@ $$t_0=\frac{\bar{x}-\mu_0}{\dfrac{s_x}{\sqrt{n}}}$$
 
 onde $\mu_0$ é o valor alegado, $n$ é o número de observações e $s_x$ é o desvio padrão da amostra. Para a hipótese bilateral, rejeita-se a $H_0$ quando $t_0$ excede o valor crítico $t_{\frac{\alpha}{2}, n-1}$, a um nível de significância $\alpha$ com $\nu = n-1$ graus de liberdade. Já para um teste unilateral, rejeita-se $H_0$, quando $t_0$ excede o valor $t_{\frac{\alpha}{2}, n-1}$ positivo ou negativo conforme o teste se refere à verificação do valor amostral ser maior ou menor do que o valor alegado.
 
-### Procedimentos
+## Procedimentos
 
 1.	Verificar suposições: normalidade (realizada excepcionalmente adiante)
 2.	Fixar a $H_0$ e a $H_1$;
@@ -1542,11 +1542,11 @@ A **não rejeição de $H_0$** pode ser novamente observada de três maneiras:
 * O valor absoluto de $t_0$, 0.7874, não excede o valor crítico unicaudal que é 1.684875.
 
 
-## Análise de normalidade
+# Análise de normalidade
 
 Muitos testes estatísticos supõem que a distribuição da amostra siga uma distribuição particular, especialmente a normal. A verificação da qualidade de ajuste da distribuição da variável aleatória pode ser realizada por meior de exame gráfico e por testes formais. 
 
-### Análise gráfica da normalidade
+## Análise gráfica da normalidade
 
 ```{r}
 #| fig-cap: "Observações das vidas úteis de 40 baterias"
@@ -1605,7 +1605,7 @@ lines(density(scale(bateria$vida_util)), col='red')
 legend(.5,0.7, c("Dens. teórica","Dens. empírica"), fill=c("blue", "red"),box.col=0, border = c("blue", "red"),horiz=F)
 ```
 
-### Testes de normalidade
+## Testes de normalidade
 
 Para testar se os dados seguem uma distribição normal, deve-se realizar um teste formal. Há vários disponíveis do R, contudo, o teste de Shapiro-Wilk tem sido indicado para pequenas amostras. O Shapiro-Wilk é um dos testes mais poderosos de normalidade, especialmente para pequenas amostras. Segundo Fávero et al. (2009), **W** é calculado por meio da seguinte equação:
 
@@ -1626,7 +1626,7 @@ não se pode rejeitar a normalidade dos dados porque o valor-P não é menor do 
 library("nortest")
 lillie.test(bateria$vida_util) # Lilliefors
 ```
-### Exercício
+## Exercício
 Exemplo e dados obtidos em: 
 http://www.instantr.com/2012/12/29/performing-a-one-sample-t-test-in-r/
 
@@ -1637,7 +1637,7 @@ As máquinas de uma fábrica devem envasar 500 ml de refrigerantes nas garrafas.
 * Realize o teste T com um nível de significância de 1%.
 
 
-## Teste de hipótese para um fator com dois níveis (duas amostras independentes).
+# Teste de hipótese para um fator com dois níveis (duas amostras independentes).
 
 $$
 \begin{array}{llcc}
@@ -1774,7 +1774,7 @@ curve(dnorm(x), add=TRUE, col=2); lines(density(scale(dados$resp[dados$argamassa
 legend(-2,0.4, c("Dens. teórica","Dens. empírica"), col=c("red", "green"),lty=c(1,1),box.col=0, horiz=F )
 ```
 
-### Teste de normalidade dos dados
+## Teste de normalidade dos dados
 
 
 ```{r}
@@ -1785,7 +1785,7 @@ tapply(dados$resp, dados$argamassa, shapiro.test)
 # Normalidade = OK, OK
 ```
 
-### Teste de homogeneidade das variâncias (Homocedasticidade)
+## Teste de homogeneidade das variâncias (Homocedasticidade)
 
 Os dois testes de homocedasticidade são o teste F e o teste de Levene (1960). Nos dois casos, testam-se as seguintes hipóteses:
 
@@ -1801,7 +1801,7 @@ tapply(dados$resp, dados$argamassa, var)
 Não são iguais, mas será que a diferença é significativa a ponto de violar a suposição de igualdade de variâncias? Para determinar a diferença entre as variâncias é grave, testes estatíscos podem ser realizados.
 
 
-#### Teste F de homogeneidade de variâncias
+### Teste F de homogeneidade de variâncias
 
 O teste F de homogeneidade de variâncias é usado para verificar se duas populações têm variâncias iguais, comparando as variâncias das duas amostras, $s_1^2$ and $s_2^2$, por meio do quociente.
 
@@ -1887,7 +1887,7 @@ var.test(resp ~ argamassa, data = dados)
 
 Como se pode observar nos resultados, o valor P da estatística F é maior do que significância estabelecida, $F(9, 9) = 1.6293, p = .4785$, de modo que não se pode rejeitar a hipótese nula de que homocedasticidade, ou seja, as variâncias das amostras são iguais.
 
-#### O Teste de Levene
+### O Teste de Levene
 O teste de Levene (1960) testa a hipótese nula de que as variâncias das amostras são iguais. Fávero et al. (2009) explicam que  estatística $L$ é dada por
 
 $$L=\frac{N-k}{k-1}\times
@@ -1941,8 +1941,8 @@ plot(x, y, type="l", lwd=1, col=1, axes=FALSE, xlab="", ylab="", frame.plot=FALS
 segments(min(x), 0, max(x), 0, lwd = 1)
 
 # Região de não rejeição
-text(1, 0.50, "Região de\nnão rejeição de", cex = 0.9)
-text(1, 0.46, expression(H[0]), cex = 0.9)
+text(1, 0.60, "Região de\nnão rejeição de", cex = 0.9)
+text(1, 0.30, expression(H[0]), cex = 0.9)
 
 # Região de rejeição (cauda direita)
 area <- x[x >= Fcrit]
@@ -1950,7 +1950,7 @@ polygon(c(Fcrit, area, max(x)),
         c(0, df(area, df1, df2), 0),
         col = rgb(0.2, 0.5, 0.5, 0.2))
 
-text(6, 0.50, "Região\nde rejeição", cex=.9)
+text(6, 0.60, "Região\nde rejeição", cex=.9)
 text(Fcrit, 0.30, expression(alpha == 0.05), cex=.9)
 
 # Linha do valor F calculado
@@ -1966,7 +1966,7 @@ mtext(round(Fcrit, 3), side=1, line=0, at=Fcrit, cex=.8)
 
 
 
-### O teste T para dois tratamentos independentes
+## O teste T para dois tratamentos independentes
 
 Finalmente, tendo em conta que as distribuições são normalmente distribuídas, pode-se realizar o teste t de duas maneiras conforme as variâncias das amostram sejam ou não iguais.
 
