@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -69,13 +72,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -160,7 +163,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#tipos-de-erros-em-um-teste-de-hipóteses" id="toc-tipos-de-erros-em-um-teste-de-hipóteses" class="nav-link" data-scroll-target="#tipos-de-erros-em-um-teste-de-hipóteses"><span class="header-section-number">5.1</span> Tipos de erros em um teste de hipóteses</a></li>
   <li><a href="#valor-p-e-alfa" id="toc-valor-p-e-alfa" class="nav-link" data-scroll-target="#valor-p-e-alfa"><span class="header-section-number">5.2</span> Valor P e alfa</a></li>
-  <li><a href="#teste-de-hipótese-para-uma-amostra-variância-desconhecida" id="toc-teste-de-hipótese-para-uma-amostra-variância-desconhecida" class="nav-link" data-scroll-target="#teste-de-hipótese-para-uma-amostra-variância-desconhecida"><span class="header-section-number">5.3</span> Teste de hipótese para uma amostra (variância desconhecida)</a>
+  <li><a href="#teste-t-para-uma-amostra-variância-desconhecida" id="toc-teste-t-para-uma-amostra-variância-desconhecida" class="nav-link" data-scroll-target="#teste-t-para-uma-amostra-variância-desconhecida"><span class="header-section-number">5.3</span> Teste T para uma amostra (variância desconhecida)</a>
   <ul class="collapse">
   <li><a href="#exemplo" id="toc-exemplo" class="nav-link" data-scroll-target="#exemplo"><span class="header-section-number">5.3.1</span> Exemplo</a></li>
   <li><a href="#procedimentos" id="toc-procedimentos" class="nav-link" data-scroll-target="#procedimentos"><span class="header-section-number">5.3.2</span> Procedimentos</a></li>
@@ -175,7 +178,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#teste-de-normalidade-dos-dados" id="toc-teste-de-normalidade-dos-dados" class="nav-link" data-scroll-target="#teste-de-normalidade-dos-dados"><span class="header-section-number">5.5.1</span> Teste de normalidade dos dados</a></li>
   <li><a href="#teste-de-homogeneidade-das-variâncias-homocedasticidade" id="toc-teste-de-homogeneidade-das-variâncias-homocedasticidade" class="nav-link" data-scroll-target="#teste-de-homogeneidade-das-variâncias-homocedasticidade"><span class="header-section-number">5.5.2</span> Teste de homogeneidade das variâncias (Homocedasticidade)</a></li>
-  <li><a href="#o-teste-t-para-dois-tratamentos-independentes" id="toc-o-teste-t-para-dois-tratamentos-independentes" class="nav-link" data-scroll-target="#o-teste-t-para-dois-tratamentos-independentes"><span class="header-section-number">5.5.3</span> O teste t para dois tratamentos independentes</a></li>
+  <li><a href="#o-teste-t-para-dois-tratamentos-independentes" id="toc-o-teste-t-para-dois-tratamentos-independentes" class="nav-link" data-scroll-target="#o-teste-t-para-dois-tratamentos-independentes"><span class="header-section-number">5.5.3</span> O teste T para dois tratamentos independentes</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -267,7 +270,7 @@ window.Quarto = {
 Figura&nbsp;1: População e amostra
 </figcaption>
 <div aria-describedby="fig-pop_amostra-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/img_pop_amostra.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/img_pop_amostra.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="198">
 </div>
 </figure>
 </div>
@@ -298,7 +301,7 @@ Figura&nbsp;1: População e amostra
 Figura&nbsp;2: Independentes (Não Pareadas ou Não relacionadas)
 </figcaption>
 <div aria-describedby="fig-independentes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/img_independentes.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/img_independentes.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="488">
 </div>
 </figure>
 </div>
@@ -312,7 +315,7 @@ Figura&nbsp;2: Independentes (Não Pareadas ou Não relacionadas)
 Figura&nbsp;3: Dependentes (Pareadas ou Relacionadas)
 </figcaption>
 <div aria-describedby="fig-dependentes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/img_dependentes.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/img_dependentes.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="488">
 </div>
 </figure>
 </div>
@@ -482,7 +485,7 @@ Figura&nbsp;3: Dependentes (Pareadas ou Relacionadas)
 Figura&nbsp;4: Quartis da distribuição
 </figcaption>
 <div aria-describedby="fig-quartis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/img_quartis.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/img_quartis.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="378">
 </div>
 </figure>
 </div>
@@ -996,7 +999,7 @@ http://sphaerula.com/legacy/R/placingTextInPlots.html
 Figura&nbsp;17: Roleta de graus
 </figcaption>
 <div aria-describedby="fig-graus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/img_graus.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/img_graus.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="150">
 </div>
 </figure>
 </div>
@@ -1017,7 +1020,7 @@ Figura&nbsp;17: Roleta de graus
 Figura&nbsp;18: Probabilidade de graus
 </figcaption>
 <div aria-describedby="fig-prob_graus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/probRoleta1.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/probRoleta1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="240">
 </div>
 </figure>
 </div>
@@ -1213,7 +1216,7 @@ Figura&nbsp;26: Comparação entre a curva padrão e distribuição t com 3 gl
 Figura&nbsp;27: População e amostra
 </figcaption>
 <div aria-describedby="fig-ic_conceito-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/img_ic_conceito.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/img_ic_conceito.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="535">
 </div>
 </figure>
 </div>
@@ -1243,7 +1246,7 @@ Figura&nbsp;27: População e amostra
 Figura&nbsp;28: Intervalo de confiança
 </figcaption>
 <div aria-describedby="fig-ic.png-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/img_ic.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/img_ic.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="365">
 </div>
 </figure>
 </div>
@@ -1334,30 +1337,35 @@ Figura&nbsp;29: Teste de hipótese bicaudal
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-h_un_esquerda-1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<div id="fig-h_un_direita" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-h_un_esquerda-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;30: Teste de hipótese unicaudal à esquerda
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-h_un_direita-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;30: Teste de hipótese unicaudal à direita
 </figcaption>
-<div aria-describedby="fig-h_un_esquerda-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-h_un_direita-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-h_un_direita-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-h_un_esquerda" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-h_un_esquerda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;31: Teste de hipótese unicaudal à esquerda
+</figcaption>
+<div aria-describedby="fig-h_un_esquerda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-h_un_esquerda-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 </figure>
 </div>
 </div>
-<div class="cell-output-display">
-<div id="fig-h_un_esquerda-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-h_un_esquerda-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;31: Teste de hipótese unicaudal à esquerda
-</figcaption>
-<div aria-describedby="fig-h_un_esquerda-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-h_un_esquerda-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
-</figure>
-</div>
-</div>
-</div>
+<blockquote class="blockquote">
+<p>Não rejeitar a hipótese nula não significa provar que ela seja verdadeira. Significa apenas que, com os dados disponíveis, não há evidências estatísticas suficientes para rejeitá-la (Altman).</p>
+</blockquote>
 <section id="tipos-de-erros-em-um-teste-de-hipóteses" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="tipos-de-erros-em-um-teste-de-hipóteses"><span class="header-section-number">5.1</span> Tipos de erros em um teste de hipóteses</h2>
 <p align="center">
@@ -1372,7 +1380,7 @@ Figura&nbsp;31: Teste de hipótese unicaudal à esquerda
 Figura&nbsp;32: Tipos de erros
 </figcaption>
 <div aria-describedby="fig-erro_tipo.png-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Figuras/img_erro_tipo.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+<img src="Figuras/img_erro_tipo.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="144">
 </div>
 </figure>
 </div>
@@ -1386,7 +1394,9 @@ Figura&nbsp;32: Tipos de erros
 </section>
 <section id="valor-p-e-alfa" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="valor-p-e-alfa"><span class="header-section-number">5.2</span> Valor P e alfa</h2>
-<p>O valor-p pode ser definido como o nível de significância exato “de a hipótese nula ser verdadeira à luz dos dados amostrais” (LEVIN; FOX, 2004, p.&nbsp;234), ou, como definem Krishnaiah e Shahabudeen (2012), é o menor nível de significância (<span class="math inline">\(\alpha\)</span>) abaixo da qual a hipótese nula é rejeitada.</p>
+<p>O valor-p é uma medida que indica o quanto os dados observados são compatíveis com a hipótese nula (<span class="math inline">\(H_0\)</span>). De forma mais precisa, o valor-p representa a probabilidade de obter um resultado tão extremo quanto, ou mais extremo que, o observado, supondo que a hipótese nula (<span class="math inline">\(H_0\)</span>) seja verdadeira.</p>
+<p>Quando o Valor-p for pequeno, os dados são pouco compatíveis com <span class="math inline">\(H_0\)</span>, fornecendo evidências contra a hipótese nula, por outro lado, se o Valor-p for grande, os dados são compatíveis com <span class="math inline">\(H_0\)</span>, não havendo evidências suficientes para rejeitá-la.</p>
+<p>Para tomar a decisão, compara-se o valor-p com o nível de significância <span class="math inline">\(\alpha=0,05\)</span>.</p>
 <ul>
 <li>Se o valor-p for <span class="math inline">\(\geq\alpha\)</span>, não se rejeita <span class="math inline">\(H_0\)</span>.</li>
 <li>Se o valor-p for <span class="math inline">\(&lt;\alpha\)</span>, rejeita-se <span class="math inline">\(H_0\)</span>.</li>
@@ -1397,7 +1407,7 @@ Figura&nbsp;32: Tipos de erros
 <div id="fig-valor_p" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-valor_p-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;33: Interpretação gráfica do Valor P
+Figura&nbsp;33: Relação entre o nível de significância (<span class="math inline">\(\alpha\)</span>) e o valor-p.
 </figcaption>
 <div aria-describedby="fig-valor_p-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-valor_p-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
@@ -1411,8 +1421,8 @@ Figura&nbsp;33: Interpretação gráfica do Valor P
 <p><span class="math display">\[p&lt;.05\]</span> <span class="math display">\[p&lt;.01\]</span> <span class="math display">\[p&lt;.001\]</span></p>
 <p>Todavia quando <span class="math inline">\(p&gt;.05\)</span>, reporta-se somente <span class="math inline">\(n.s.\)</span>, do inglês <em>non-significant</em>.</p>
 </section>
-<section id="teste-de-hipótese-para-uma-amostra-variância-desconhecida" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="teste-de-hipótese-para-uma-amostra-variância-desconhecida"><span class="header-section-number">5.3</span> Teste de hipótese para uma amostra (variância desconhecida)</h2>
+<section id="teste-t-para-uma-amostra-variância-desconhecida" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="teste-t-para-uma-amostra-variância-desconhecida"><span class="header-section-number">5.3</span> Teste T para uma amostra (variância desconhecida)</h2>
 <p>Pode ocorrer que se esteja interessado em determinar se um atributo de uma amostra experimental é ou não igual a certo valor.</p>
 <p><span class="math display">\[
 \begin{array}{llcc}
@@ -1439,7 +1449,47 @@ H_{1\textrm{(possíveis)}}&amp;:\mu\neq\mu_0, &amp; \mu&gt;\mu_0 \; \text{ou} &a
 <li>Calcular <span class="math inline">\(t_0\)</span>.</li>
 <li>Decidir. Para um teste bicaudal, rejeita-se <span class="math inline">\(H_0\)</span> se <span class="math inline">\(-t_{\frac{\alpha}{2}, \nu}&gt;t_0&gt;t_{\frac{\alpha}{2}, n-1}\)</span>, ou melhor, <span class="math inline">\(|t_0|&gt;t_{\frac{\alpha}{2}, \nu}\)</span>. Caso se opte pela abordagem do valor-P, rejeita-se <span class="math inline">\(H_0\)</span> se o valor-P for inferior ao valor <span class="math inline">\(\alpha\)</span> de significância do teste. Pode-se ainda verificar se o zero faz parte do intervalo de confiança da diferença, no caso negativo é porque a diferença zero não é provável, rejeitando-se <span class="math inline">\(H_0\)</span>.</li>
 </ol>
-<p>Neste primeiro exemplo, deixaremos as suposição de normalidade para o final. Iniciamos carregando o arquivo baterias, inspecionando seus dados e analisando a suas estatísticas descritivas mais básicas com o comando <code>summary()</code>.</p>
+<p>Neste primeiro exemplo, deixaremos as suposição de normalidade para o final. Nossa amostra, tem as seguintes estatísticas:</p>
+<ul>
+<li>n = 40</li>
+<li><span class="math inline">\(\bar{y} = 3,4125\)</span></li>
+<li><span class="math inline">\(s = 0.7028\)</span></li>
+</ul>
+<p><span class="math display">\[
+ep = \frac{s}{\sqrt{n}}
+     = \frac{0,7028}{\sqrt{40}}
+     = \frac{0.7028}{6,3246}
+     \approx 0.1111
+\]</span></p>
+<p><span class="math display">\[
+t_0 =
+    \frac{\bar{y} - \mu_0}{s / \sqrt{n}}=\frac{\bar{y} - \mu_0}{ep}
+    = \frac{3,4125 - 3,5}{0,1111} \approx -0.0138
+\]</span></p>
+<p>Para um teste bilateral, nível de significância <span class="math inline">\(\alpha=0,05\)</span>:</p>
+<p>Graus de liberdade:</p>
+<p><span class="math display">\[
+\nu= n−1 = 40-1=39
+\]</span></p>
+<p>valor de t crítico bilateral:</p>
+<p><span class="math display">\[
+t_{\text{crit}} = t_{0,025;39} \approx \pm 2.022
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-t_bi" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-t_bi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;34: Teste t bicaudal para uma amostra (n = 40)
+</figcaption>
+<div aria-describedby="fig-t_bi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-t_bi-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>No R, iniciamos carregando o arquivo baterias, inspecionando seus dados e analisando a suas estatísticas descritivas mais básicas com o comando <code>summary()</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load(file="bateria.RData")</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bateria)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1546,7 +1596,7 @@ mean of x
 <div id="fig-plot_baterias" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-plot_baterias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;34: Observações das vidas úteis de 40 baterias
+Figura&nbsp;35: Observações das vidas úteis de 40 baterias
 </figcaption>
 <div aria-describedby="fig-plot_baterias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-plot_baterias-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
@@ -1561,7 +1611,7 @@ Figura&nbsp;34: Observações das vidas úteis de 40 baterias
 <div id="fig-dessidade" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-dessidade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;35: Densidade
+Figura&nbsp;36: Densidade
 </figcaption>
 <div aria-describedby="fig-dessidade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-dessidade-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
@@ -1583,7 +1633,7 @@ Figura&nbsp;35: Densidade
 <div id="fig-qqp_baterias" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-qqp_baterias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;36: QQplots - vida útteis de baterias
+Figura&nbsp;37: QQplots - vida útteis de baterias
 </figcaption>
 <div aria-describedby="fig-qqp_baterias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-qqp_baterias-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
@@ -1602,7 +1652,7 @@ Figura&nbsp;36: QQplots - vida útteis de baterias
 <div id="fig-hist_curva" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-hist_curva-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;37: Histograma sobreposto pela curva normal
+Figura&nbsp;38: Histograma sobreposto pela curva normal
 </figcaption>
 <div aria-describedby="fig-hist_curva-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-hist_curva-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
@@ -1622,7 +1672,7 @@ Figura&nbsp;37: Histograma sobreposto pela curva normal
 <div id="fig-hist_curva_pad" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-hist_curva_pad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;38: Histograma padronizado, densidade empírica vs curva normal
+Figura&nbsp;39: Histograma padronizado, densidade empírica vs curva normal
 </figcaption>
 <div aria-describedby="fig-hist_curva_pad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-hist_curva_pad-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
@@ -1718,8 +1768,8 @@ H_{1\textrm{(possíveis)}}&amp;:\mu_1\neq\mu_2, &amp; \mu_1&gt;\mu_2 \; \text{ou
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(argamassa, resp)</span>
 <span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>dados<span class="sc">$</span>argamassa <span class="ot">&lt;-</span> <span class="fu">factor</span>(dados<span class="sc">$</span>argamassa) <span class="co"># Converter em fator</span></span>
 <span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>y.means <span class="ot">&lt;-</span> <span class="fu">tapply</span>(dados<span class="sc">$</span>resp, dados<span class="sc">$</span>argamassa, mean)</span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>y.means</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>medias <span class="ot">&lt;-</span> <span class="fu">tapply</span>(dados<span class="sc">$</span>resp, dados<span class="sc">$</span>argamassa, mean)</span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>medias</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Modificado     NaoMod 
     16.764     17.042 </code></pre>
@@ -1732,10 +1782,10 @@ H_{1\textrm{(possíveis)}}&amp;:\mu_1\neq\mu_2, &amp; \mu_1&gt;\mu_2 \; \text{ou
 <span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"darkgreen"</span>),</span>
 <span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Strength ("</span>, kgf<span class="sc">/</span>cm<span class="sc">^</span><span class="dv">2</span>, <span class="st">")"</span>)))</span>
 <span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, y.means, <span class="at">pch =</span> <span class="dv">23</span>, <span class="at">bg =</span> <span class="st">"yellow"</span>, <span class="at">cex =</span> <span class="fl">1.5</span>)</span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, medias, <span class="at">pch =</span> <span class="dv">23</span>, <span class="at">bg =</span> <span class="st">"yellow"</span>, <span class="at">cex =</span> <span class="fl">1.5</span>)</span>
 <span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-11"><a href="#cb96-11" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, y.means,</span>
-<span id="cb96-12"><a href="#cb96-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">round</span>(y.means, <span class="dv">2</span>),</span>
+<span id="cb96-11"><a href="#cb96-11" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, medias,</span>
+<span id="cb96-12"><a href="#cb96-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">round</span>(medias, <span class="dv">2</span>),</span>
 <span id="cb96-13"><a href="#cb96-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">3</span>, <span class="at">cex =</span> .<span class="dv">8</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
@@ -1745,7 +1795,7 @@ H_{1\textrm{(possíveis)}}&amp;:\mu_1\neq\mu_2, &amp; \mu_1&gt;\mu_2 \; \text{ou
 </div>
 </div>
 </div>
-<p>O gráfico de pontos (<em>strichart</em>) sugere que a distribuição amostral de resistência das fibras não modificadas (<em>Unmodified</em>) apresentam valores superiores à distribuição da modificada. As médias, indicadas cadas pelas setas, exibem que a resistência das modificadas é ligeiramente maior do que resistência média das não modificadas.</p>
+<p>O gráfico de pontos (<em>strichart</em>) sugere que a distribuição amostral de resistência das fibras não modificadas (<em>NaoMod</em>) apresentam valores superiores à distribuição da modificada. As médias, indicadas cadas pelas setas, exibem que a resistência das modificadas é ligeiramente maior do que resistência média das não modificadas.</p>
 <p>A seguir, elabora-se o Boxplot com médias indicadas por ‘+’</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(resp <span class="sc">~</span> argamassa,</span>
@@ -1755,7 +1805,7 @@ H_{1\textrm{(possíveis)}}&amp;:\mu_1\neq\mu_2, &amp; \mu_1&gt;\mu_2 \; \text{ou
 <span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Strength (kgf/cm^2)"</span>)</span>
 <span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, y.means, <span class="at">pch =</span> <span class="dv">23</span>, <span class="at">bg =</span> <span class="st">"yellow"</span>, <span class="at">cex =</span> <span class="fl">1.5</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, medias, <span class="at">pch =</span> <span class="dv">23</span>, <span class="at">bg =</span> <span class="st">"yellow"</span>, <span class="at">cex =</span> <span class="fl">1.5</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1764,13 +1814,24 @@ H_{1\textrm{(possíveis)}}&amp;:\mu_1\neq\mu_2, &amp; \mu_1&gt;\mu_2 \; \text{ou
 </div>
 </div>
 </div>
-<p>Verificação gráfica da normalidade dos dados</p>
+<p>Verificação gráfica da normalidade dos dados. Para filtrar somente os dados de resistência à compressão axial da categoria de argamassa modificada, selecionam-se somente os elementos de respostas associados com o fator ’Modificado nas funções, <code>dados$resp[dados$argamassa == "Modificado"]</code>.</p>
 <div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Verificação Gráfica da Normalidade</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))   <span class="co"># 1 linha, 2 colunas</span></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"Modificado"</span>],</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Modificada"</span>)</span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"Modificado"</span>])</span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"NaoMod"</span>],</span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"NaoMod"</span>)</span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"NaoMod"</span>])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-qqp_argamassa" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-qqp_argamassa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;39: QQplot Argamassa
+Figura&nbsp;40: QQplot Argamassa
 </figcaption>
 <div aria-describedby="fig-qqp_argamassa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-qqp_argamassa-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
@@ -1780,49 +1841,24 @@ Figura&nbsp;39: QQplot Argamassa
 </div>
 </div>
 <div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores padronizados</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))   <span class="co"># 1 linha, 2 colunas</span></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">scale</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"Modificado"</span>]),</span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="st">"Modificada"</span>)</span>
+<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">scale</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"Modificado"</span>]))</span>
+<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">scale</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"NaoMod"</span>]),</span>
+<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="st">"NaoMod"</span>)</span>
+<span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">scale</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"NaoMod"</span>]))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-qqp_argamassa_pad" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-qqp_argamassa_pad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;40: QQplot Argamassa - dados padronizados
+Figura&nbsp;41: QQplot Argamassa - dados padronizados
 </figcaption>
 <div aria-describedby="fig-qqp_argamassa_pad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="index_files/figure-html/fig-qqp_argamassa_pad-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
-</div>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogramas</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">scale</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"Modificado"</span>]), <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="st">"Resistência"</span>, <span class="at">main =</span> <span class="st">""</span>)</span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x), <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">col=</span><span class="dv">2</span>); <span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">scale</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"Modificado"</span>])), <span class="at">col=</span><span class="dv">3</span>)</span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(.<span class="dv">5</span>,<span class="fl">0.6</span>, <span class="fu">c</span>(<span class="st">"Dens. teórica"</span>,<span class="st">"Dens. empírica"</span>), <span class="at">fill=</span><span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"green"</span>),<span class="at">box.col=</span><span class="dv">0</span>, <span class="at">horiz=</span>F )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-hist_mod" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-hist_mod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;41: Histograma de Argamassa Modificada
-</figcaption>
-<div aria-describedby="fig-hist_mod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-hist_mod-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
-</div>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">scale</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"NaoMod"</span>]), <span class="at">freq=</span><span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="st">"Resistência"</span>, <span class="at">main =</span> <span class="st">""</span>)</span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x), <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">col=</span><span class="dv">2</span>); <span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">scale</span>(dados<span class="sc">$</span>resp[dados<span class="sc">$</span>argamassa <span class="sc">==</span> <span class="st">"NaoMod"</span>])), <span class="at">col=</span><span class="dv">3</span>)</span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="fl">0.4</span>, <span class="fu">c</span>(<span class="st">"Dens. teórica"</span>,<span class="st">"Dens. empírica"</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"green"</span>),<span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),<span class="at">box.col=</span><span class="dv">0</span>, <span class="at">horiz=</span>F )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-hist_nmod" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-hist_nmod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;42: Histograma de Argamassa Não Modificada
-</figcaption>
-<div aria-describedby="fig-hist_nmod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-hist_nmod-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 </figure>
 </div>
@@ -1857,11 +1893,36 @@ W = 0.96262, p-value = 0.8153</code></pre>
 <h3 data-number="5.5.2" class="anchored" data-anchor-id="teste-de-homogeneidade-das-variâncias-homocedasticidade"><span class="header-section-number">5.5.2</span> Teste de homogeneidade das variâncias (Homocedasticidade)</h3>
 <p>Os dois testes de homocedasticidade são o teste F e o teste de Levene (1960). Nos dois casos, testam-se as seguintes hipóteses:</p>
 <p><span class="math display">\[H_0: \sigma_1=\sigma_2\]</span> <span class="math display">\[H_1: \sigma_1\ne\sigma_2\]</span></p>
+<p>Examine as variâncias das duas amostras:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(dados<span class="sc">$</span>resp, dados<span class="sc">$</span>argamassa, var)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Modificado     NaoMod 
+0.10013778 0.06146222 </code></pre>
+</div>
+</div>
+<p>Não são iguais, mas será que a diferença é significativa a ponto de violar a suposição de igualdade de variâncias? Para determinar a diferença entre as variâncias é grave, testes estatíscos podem ser realizados.</p>
 <section id="teste-f-de-homogeneidade-de-variâncias" class="level4" data-number="5.5.2.1">
 <h4 data-number="5.5.2.1" class="anchored" data-anchor-id="teste-f-de-homogeneidade-de-variâncias"><span class="header-section-number">5.5.2.1</span> Teste F de homogeneidade de variâncias</h4>
-<p>O teste F para homogeneidade de variâncias é o quociente entre as variâncias das amostras, <span class="math inline">\(s_1^2\)</span> and <span class="math inline">\(s_2^2\)</span>.</p>
+<p>O teste F de homogeneidade de variâncias é usado para verificar se duas populações têm variâncias iguais, comparando as variâncias das duas amostras, <span class="math inline">\(s_1^2\)</span> and <span class="math inline">\(s_2^2\)</span>, por meio do quociente.</p>
 <p><span class="math display">\[F=\frac{s_1^2}{s_2^2}\]</span></p>
-<p>Com <span class="math inline">\(n_1-1\)</span> graus de liberdade para o numerador e <span class="math inline">\(n_2-1\)</span> graus de liberdade para o denominador.</p>
+<p>Com <span class="math inline">\(n_1-1\)</span> graus de liberdade para o numerador e <span class="math inline">\(n_2-1\)</span> graus de liberdade para o denominador. Se as variâncias forem iguais, esse quociente deve ficar próximo de 1. Quanto mais distante de 1, maior a evidência de que as variâncias são diferentes.</p>
+<p>A estatística F resultante é:</p>
+<p><span class="math display">\[F=\frac{s_1^2}{s_2^2}=F=\frac{0,10013778}{0,06146222} \approx 1,6293\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-f_homogeneidade_bicaudal" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-f_homogeneidade_bicaudal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;42: Teste F de homogeneidade de variâncias (bicaudal)
+</figcaption>
+<div aria-describedby="fig-f_homogeneidade_bicaudal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-f_homogeneidade_bicaudal-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
 <p>No R, a função <span class="math inline">\(var.test()\)</span> realiza o teste F para duas variâncias, podendo ser:</p>
 <ul>
 <li><code>var.test(respostas ~ tratamento, data)</code> no caso das respostas estarem num vetor e os tratamentos noutro ou</li>
@@ -1869,8 +1930,8 @@ W = 0.96262, p-value = 0.8153</code></pre>
 </ul>
 <p>A seguir, os comandos do teste F para as variâncias das distribuições amostrais dos ensaios de resistência a tensão adesiva de duas formulações de argamassa do exemplo.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Teste F de homogeneidade de variâncias</span></span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(resp <span class="sc">~</span> argamassa, <span class="at">data =</span> dados)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Teste F de homogeneidade de variâncias</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(resp <span class="sc">~</span> argamassa, <span class="at">data =</span> dados)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     F test to compare two variances
@@ -1897,36 +1958,104 @@ ratio of variances
 <p>em que <span class="math inline">\(X_{ij}\)</span> é a observação <span class="math inline">\(j\)</span> da amostra <span class="math inline">\(i\)</span> e <span class="math inline">\(\bar{X}_i\)</span> é a média da amostra <span class="math inline">\(i\)</span>.</p>
 <p>No R, o teste de Levene pode ser realizado pela função <code>leveneTest()</code> do pacote <code>car</code>, que por <em>default</em> o teste de Brown-Forsythe baseado na mediana, o que o torna um mais robusto.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste de Levene</span></span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(resp <span class="sc">~</span> argamassa ,<span class="at">data=</span>dados) <span class="co"># Brown-Forsythe test</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste de Levene</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(resp <span class="sc">~</span> argamassa ,<span class="at">data=</span>dados) <span class="co"># Brown-Forsythe test</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
       Df F value Pr(&gt;F)
 group  1  1.9528 0.1793
       18               </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(resp <span class="sc">~</span> argamassa, <span class="at">center =</span> mean ,<span class="at">data=</span>dados) <span class="co"># Levene</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(resp <span class="sc">~</span> argamassa, <span class="at">center =</span> mean ,<span class="at">data=</span>dados) <span class="co"># Levene</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = mean)
       Df F value Pr(&gt;F)
 group  1  2.0807 0.1663
       18               </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Homocedasticidade = OK: variâncias iguais</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Homocedasticidade = OK: variâncias iguais</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-levene" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-levene-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;43: Teste de Levene (Brown–Forsythe)
+</figcaption>
+<div aria-describedby="fig-levene-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-levene-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
 <section id="o-teste-t-para-dois-tratamentos-independentes" class="level3" data-number="5.5.3">
-<h3 data-number="5.5.3" class="anchored" data-anchor-id="o-teste-t-para-dois-tratamentos-independentes"><span class="header-section-number">5.5.3</span> O teste t para dois tratamentos independentes</h3>
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="o-teste-t-para-dois-tratamentos-independentes"><span class="header-section-number">5.5.3</span> O teste T para dois tratamentos independentes</h3>
 <p>Finalmente, tendo em conta que as distribuições são normalmente distribuídas, pode-se realizar o teste t de duas maneiras conforme as variâncias das amostram sejam ou não iguais.</p>
-<p>No caso das variâncias serem iguais, <span class="math inline">\(s_1^2\)</span> e <span class="math inline">\(s_2^2\)</span>, significa que ambas estimam o mesmo valor, podendo ser combinadas numa estimativa única <span class="math inline">\(s_p^2\)</span>.</p>
-<p><span class="math display">\[S_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}\]</span></p>
+<p>No caso das variâncias serem iguais, <span class="math inline">\(s_1^2\)</span> e <span class="math inline">\(s_2^2\)</span>, significa que ambas estimam o mesmo valor, podendo ser combinadas (pooled) numa estimativa única <span class="math inline">\(s_p^2\)</span>.</p>
+<p><span class="math display">\[s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}\]</span></p>
+<p>O desvio-padrão combinado (pooled) é:</p>
+<p><span class="math display">\[
+s_p=\sqrt{s_p^2}
+\]</span></p>
 <p>Nesse caso, para testar <span class="math inline">\(H_0\)</span>, a estatística teste é a seguinte:</p>
-<p><span class="math display">\[t_0=\frac{\bar{x_1}-\bar{x_2}}{s_p^2\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}\]</span></p>
+<p><span class="math display">\[t_0=\frac{\bar{x_1}-\bar{x_2}}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}\]</span></p>
+<p>Considerando os valores das duas amostras, temos:</p>
+<ul>
+<li><span class="math inline">\(n_1 = 10\)</span> 3 <span class="math inline">\(n_2 = 10\)</span></li>
+<li><span class="math inline">\(s_1^2 = 0.10013778\)</span> e <span class="math inline">\(s_2^2 = 0.06146222\)</span></li>
+</ul>
+<p><span class="math display">\[s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}
+       = \frac{9(0,10013778) + 9(0,06146222)}{18}
+\approx
+0,0808
+\]</span></p>
+<p><span class="math display">\[
+s_p = \sqrt{0,0808} \approx 0,2842
+\]</span></p>
+<p>Erro-padrão das diferenças das médias:</p>
+<p><span class="math display">\[
+ep
+= s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}
+= 0,2842 \sqrt{0,2}
+= 0,2842 \times 0,4472 \approx 0,1271
+\]</span></p>
+<p>Estatística T calculado:</p>
+<p><span class="math display">\[
+t_0
+= \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+= \frac{16,764 - 17.023}{0,2842 \sqrt{\frac{1}{10} + \frac{1}{10}}}
+= \frac{-0.278}{0,1271} \approx -2.19
+\]</span></p>
 <p>Se <span class="math inline">\(H_0\)</span> for verdadeira, <span class="math inline">\(t_0\)</span> é distribuída como <span class="math inline">\(t_{n1+n2-2}\)</span>, para o teste bicaudal, sendo, contudo rejeitada em favor de <span class="math inline">\(H_1\)</span> se <span class="math inline">\(|t_0| \geq t_{\alpha/2, n1+n2-2}\)</span>.</p>
+<p>Para um teste bilateral, nível de significância <span class="math inline">\(\alpha=0,05\)</span>:</p>
+<p>Graus de liberdade:</p>
+<p><span class="math display">\[
+\nu = n_1 + n_2 - 2 = 10 + 10 - 2 = 18
+\]</span></p>
+<p>valor de t crítico bilateral:</p>
+<p><span class="math display">\[
+t_{\text{crit}} = t_{0.025;\,18} \approx \pm 2.101
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-t_bi_2samples" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-t_bi_2samples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;44: Teste t bicaudal para duas amostras (df = 18)
+</figcaption>
+<div aria-describedby="fig-t_bi_2samples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-t_bi_2samples-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+</figure>
+</div>
+</div>
+</div>
 <p>Todavia se não for possível supor que as variâncias desconhecidas são iguais, que não existe um teste t exato para <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>,como explicam Hines et al.&nbsp;Nesse caso, pode ser utilizado a estatística</p>
 <p><span class="math display">\[t_0^*=\frac{\bar{x_1}-\bar{x_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}\]</span></p>
 <p>que, se a hipótese nula for verdadeira, segue aproximadamente distribuição t, com graus de liberdade calculados por</p>
@@ -1943,8 +2072,8 @@ group  1  2.0807 0.1663
 </ol>
 <p>A seguir os comandos do teste t para dois tratamentos independentes no R, considerando variâncias iguais.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Teste t para amostras independentes com variáveis iguais</span></span>
-<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(resp <span class="sc">~</span> argamassa, <span class="at">var.equal=</span>T)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Teste t para amostras independentes com variáveis iguais</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(resp <span class="sc">~</span> argamassa, <span class="at">data =</span> dados, <span class="at">var.equal=</span>T)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
@@ -1961,7 +2090,7 @@ mean in group Modificado     mean in group NaoMod
 </div>
 <p>Para se obter o valor crítico <span class="math inline">\(t_{0,05/2;18}\)</span></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span><span class="dv">18</span>) <span class="co">#IC= 97.5%, alfa=5%/2=2.5%, 10+10-2=18, positivo</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span><span class="dv">18</span>) <span class="co">#IC= 97.5%, alfa=5%/2=2.5%, 10+10-2=18, positivo</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.100922</code></pre>
 </div>

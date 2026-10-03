@@ -1118,7 +1118,12 @@ y <-dnorm(x,mean=0,sd=1) # y como densidade de x
 plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
 # title(main="Teste de hipótese bicaudal")
 Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
-text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
+#text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
+
+text(0, 0.20, "Região de\nnão rejeição de", adj = c(0.5, 0.5), cex = 0.9)
+text(0, 0.16, expression(H[0]), cex = 0.9)
+
+
 mtext(expression("nível de significância (" * alpha==0.05 *")"),side=3,line=0.5,at=0,col="blue", cex=1)
 
 colors_1<-rgb(0.2,0.5,0.5,0.2) #verde
@@ -1127,7 +1132,7 @@ lb <- 1.96; ub <- 4 # limtes inferior e superior de x
 area <- c(1.96,x[x>= 1.96]) # Area de X que será destacada
 hx <- c(dnorm(1.96),dnorm(x[x>= 1.96])) # Y como densidade da area de X
 polygon(c(lb,area,ub), c(-.01,hx,-.01), col=colors_1)
-text(3,0.2,"Região \nde\nrejeição",adj = c(0.5, 0.5),cex=.9)
+text(3,0.2,"Região de\nrejeição",adj = c(0.5, 0.5),cex=.9)
 text(3,0.05,expression(P[alpha/2]==0.025),cex=.9, col="blue")
 
 # Area negativa
@@ -1135,11 +1140,39 @@ lb <- -4; ub <- -1.96 # limtes inferior e superior de x
 area <- c(x[x<= -1.96],-1.96) # Area de X que sera destacada
 hx <- c(dnorm(x[x<= -1.96]),dnorm(-1.96)) # Y como densidade da ?rea de X
 polygon(c(lb,area,ub), c(-.01,hx,-.01), col=colors_1)
-text(-3,0.2,"Região\nde\nrejeição",adj = c(0.5, 0.5),cex=.9)
+text(-3,0.2,"Região de\nrejeição",adj = c(0.5, 0.5),cex=.9)
 text(-3,0.05,expression(P[alpha/2]==0.025),cex=.9,col="blue")
 
 mtext("Valor\ncrítico",1,line=1,at=-1.96,col="blue", cex=.8)
 mtext("Valor\ncrítico",1,line=1,at=1.96,col="blue", cex=.8)
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Teste de hipótese unicaudal à direita"
+#| label: fig-h_un_direita
+#| fig-align: center
+
+plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
+# title(main="Teste de hipótese unicaudal à direita")
+Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
+#text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
+
+text(0, 0.20, "Região de\nnão rejeição de", cex = 0.9)
+text(0, 0.16, expression(H[0]), cex = 0.9)
+
+mtext(expression("nível de significância (" * alpha==0.05 *")"),side=3,line=0.5,at=0,col="blue", cex=1)
+
+# Area positiva
+lb <- 1.644854; ub <- 4 # limtes inferior e superior de x
+area <- c(1.644854,x[x>= 1.644854]) # Area de X que sera destacada
+hx <- c(dnorm(1.644854),dnorm(x[x>= 1.644854])) # Y como densidade da Area de X
+polygon(c(lb,area,ub), c(-.01,hx,-.01), col=colors_1)
+
+text(3,0.2,"Região de\nrejeição",adj = c(0.5, 0.5),cex=.9)
+text(3,0.05,expression(P[alpha]==0.05),cex=.9, col="blue")
+mtext("Valor\ncrítico",1,line=1,at=1.644854,col="blue", cex=.8)
+mtext("Regra de decisão: t calculado > t tabelado", side=1, line=2, at=0, col="blue", cex=.9)
 ```
 
 ```{r}
@@ -1149,25 +1182,14 @@ mtext("Valor\ncrítico",1,line=1,at=1.96,col="blue", cex=.8)
 #| fig-align: center
 
 plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
-# title(main="Teste de hipótese unicaudal à direita")
-Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
-text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
-mtext(expression("nível de significância (" * alpha==0.05 *")"),side=3,line=0.5,at=0,col="blue", cex=1)
-
-# Area positiva
-lb <- 1.644854; ub <- 4 # limtes inferior e superior de x
-area <- c(1.644854,x[x>= 1.644854]) # Area de X que sera destacada
-hx <- c(dnorm(1.644854),dnorm(x[x>= 1.644854])) # Y como densidade da Area de X
-polygon(c(lb,area,ub), c(-.01,hx,-.01), col=colors_1)
-text(3,0.2,"Região \nde\nrejeição",adj = c(0.5, 0.5),cex=.9)
-text(3,0.05,expression(P[alpha]==0.05),cex=.9, col="blue")
-mtext("Valor\ncrítico",1,line=1,at=1.644854,col="blue", cex=.8)
-mtext("Regra de decisão: t calculado > t tabelado", side=1, line=2, at=0, col="blue", cex=.9)
-
-plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
 #title(main="Teste de hipótese unicaudal à esquerda")
 Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
-text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
+#text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
+
+text(0, 0.20, "Região de\nnão rejeição de",adj = c(0.5, 0.5), cex = 0.9)
+text(0, 0.16, expression(H[0]), cex = 0.9)
+
+
 mtext(expression("nível de significância (" * alpha==0.05 *")"),side=3,line=0.5,at=0,col="blue", cex=1)
 
 # Area negativa
@@ -1175,11 +1197,15 @@ lb <- -4; ub <- -1.644854 # limtes inferior e superior de x
 area <- c(x[x<= -1.644854],-1.644854) # Area de X que sera destacada
 hx <- c(dnorm(x[x<= -1.644854]),dnorm(-1.644854)) # Y como densidade da area de X
 polygon(c(lb,area,ub), c(-.01,hx,-.01), col=colors_1)
-text(-3,0.2,"Região\nde\nrejeição",adj = c(0.5, 0.5),cex=.9)
+
+text(-3,0.2,"Região de\nrejeição",adj = c(0.5, 0.5),cex=.9)
 text(-3,0.05,expression(P[alpha]==0.05),cex=.9,col="blue")
 mtext("Valor\ncrítico",1,line=1,at=-1.644854,col="blue", cex=.8)
 mtext("Regra de decisão: t calculado < t tabelado", side=1, line=2, at=0, col="blue", cex=.9)
 ```
+
+
+> Não rejeitar a hipótese nula não significa provar que ela seja verdadeira. Significa apenas que, com os dados disponíveis, não há evidências estatísticas suficientes para rejeitá-la (Altman).
 
 
 ## Tipos de erros em um teste de hipóteses
@@ -1210,46 +1236,126 @@ Em virtude das dados serem amostrais, a informação disponível é incompleta; 
 
 ## Valor P e alfa
 
-O valor-p pode ser definido como o nível de significância exato "de a hipótese nula ser verdadeira à luz dos dados amostrais" (LEVIN;  FOX, 2004, p. 234), ou, como definem Krishnaiah e Shahabudeen (2012), é o menor nível de significância ($\alpha$) abaixo da qual a hipótese nula é rejeitada.
+
+O valor-p é uma medida que indica o quanto os dados observados são compatíveis com a hipótese nula ($H_0$). De forma mais precisa, o valor-p representa a probabilidade de obter um resultado tão extremo quanto, ou mais extremo que, o observado, supondo que a hipótese nula ($H_0$) seja verdadeira.
+
+Quando o Valor-p for pequeno, os dados são pouco compatíveis com $H_0$, fornecendo evidências contra a hipótese nula, por outro lado, se o Valor-p for grande, os dados são compatíveis com $H_0$, não havendo evidências suficientes para rejeitá-la.
+
+Para tomar a decisão, compara-se o valor-p com o nível de significância $\alpha=0,05$.
 
  - Se o valor-p for $\geq\alpha$, não se rejeita $H_0$. 
  - Se o valor-p for $<\alpha$,  rejeita-se $H_0$. 
  - Geralmente, rejeita-se $H_0$ quando Valor-P $<0,05$.
 
+
+
 ```{r}
 #| echo: false
-#| fig-cap: "Interpretação gráfica do Valor P"
+#| fig-cap: "Relação entre o nível de significância ($\\alpha$) e o valor-p."
 #| label: fig-valor_p
 #| fig-align: center
 
+# Distribuição normal padrão
+x <- seq(-4, 4, length.out = 1000)
+y <- dnorm(x)
 
-x <- seq(-4, 4, by=0.1) # Serie de x
-y <-dnorm(x,mean=0,sd=1) # y como densidade de x
-plot(x, y,xlab="",ylab="",type="l",yaxt="n",xaxt="n",ann=FALSE, col=1,lwd=1,frame.plot=FALSE,axes=FALSE)
-#title(main="Interpretação gráfica do Valor P")
-Axis(side=1, labels=FALSE, tck=0); Axis(side=2, labels=FALSE,yaxt="n")
+# Pontos de corte e estatística observada
+z_alpha <- qnorm(0.95)   # alfa = 0,05
+z_obs   <- 2.10
 
-text(0,0.2,"Região\nde\naceitação",adj = c(0.5, 0.5),cex=.9)
-colors_1<-rgb(0.2,0.5,0.5,0.2) #verde
+plot(
+  x, y,
+  type = "l",
+  lwd = 2,
+  col = "black",
+  axes = FALSE,
+  xlab = "",
+  ylab = "",
+  frame.plot = FALSE,
+  ylim = c(0, 0.43)
+)
 
-# Area 1
-lb <- 1.644854; ub <- 4 # limtes inferior e superior de x
-area <- c(1.644854,x[x>= 1.644854]) # Area de X que ser? destacada
-hx <- c(dnorm(1.644854),dnorm(x[x>= 1.644854])) # Y como densidade da area de X
-polygon(c(lb,area,ub), c(-.01,hx,-.01), col=colors_1)
 
-text(3,0.2,"Região \nde\nrejeição",adj = c(0.5, 0.5),cex=.9)
-text(1.9,0.015,expression(alpha),cex=1.9)
+abline(h = 0, col = "black")
+# Eixo horizontal
+# axis(
+#   side = 1,
+#   at = c(-3, 0, z_alpha, z_obs, 3),
+#   labels = c("-3", "0", 
+#              expression(z[alpha]),
+#              expression(z[obs]),
+#              "3")
+# )
 
-# Area 2
-lb <- 2.1; ub <- 4 # limtes inferior e superior de x
-area <- c(2.1,x[x>= 2.1]) # Area de X que será destacada
-hx <- c(dnorm(2.1),dnorm(x[x>= 2.1])) # Y como densidade da area de X
-polygon(c(lb,area,ub), c(-.01,hx,-.01), density = 15,col="grey",border = 1)
-text(2.1,0.12,"Valor P",cex=1,col = "blue")
-segments(2.1, 0, 2, .11, col="red", lty="dashed", lwd = 2)
+# Região de rejeição: alpha = 0,05
+x_alpha <- x[x >= z_alpha]
+y_alpha <- dnorm(x_alpha)
+
+polygon(
+  c(z_alpha, x_alpha, 4),
+  c(0, y_alpha, 0),
+  col = "grey85",
+  border = NA
+)
+
+# Região correspondente ao valor-p
+x_p <- x[x >= z_obs]
+y_p <- dnorm(x_p)
+
+polygon(
+  c(z_obs, x_p, 4),
+  c(0, y_p, 0),
+  col = "grey40",
+  border = NA
+)
+
+# Linha do ponto crítico
+abline(
+  v = z_alpha,
+  lty = 2,
+  lwd = 1.5
+)
+
+# Linha da estatística observada
+abline(
+  v = z_obs,
+  lty = 2,
+  lwd = 2
+)
+
+# Textos
+
+text(0, 0.20, "Região de\nnão rejeição de", cex = 0.9)
+text(0, 0.16, expression(H[0]), cex = 0.9)
+
+
+text(
+  z_alpha, 0.05,
+  pos = 4,
+  expression(alpha),
+  cex = 1
+)
+
+text(
+  2.65, 0.05,
+  "valor-p",
+  cex = 0.95
+)
+
+text(
+  z_alpha, 0.36,
+  labels = "Valor\ncrítico",
+  pos = 2,
+  cex = 0.8
+)
+
+text(
+  z_obs, 0.40,
+  expression("Resultado\nobservado: " * z[obs]),
+  pos = 4,
+  cex = 0.8
+)
 ```
-
 Na Figura acima, o valor P é menor do que o valor crítico calculado para o nível de significância. Suponhamos que $\alpha=0.05$ ou 5% e o valor-P seria menor, digamos $p=0.02$, ou 2%, isso indica que somente teríamos rejeitado $H_0$ se o nosso teste tivesse sido mais rigoroso. Só rejeitaríamos $H_0$ se $\alpha$ fosse menor do que 2%, mas não é o caso já que decidimos por $\alpha=5\%$.  Quando $p<\alpha$, dizemos que a estatística é significante.
 
 Um detalhe interessanto sobre a forma de reportar o valor-P em trabalhos científicos é que normalmente não se informa seu valor exato como nos resultados dos pacotes estatísticos, porque o que interesse é seu foi menor ou não do que $\alpha$ para que se termine a significância do teste. Logo o que se observa nos artigos mais recentes na literatura internacional é a seguinte notação:
@@ -1261,7 +1367,7 @@ $$p<.001$$
 Todavia quando $p>.05$, reporta-se somente $n.s.$, do inglês *non-significant*.
 
 
-## Teste de hipótese para uma amostra (variância desconhecida)
+## Teste T para uma amostra (variância desconhecida)
 
 Pode ocorrer que se esteja interessado em determinar se um atributo de uma amostra experimental é ou não igual a certo valor.
 
@@ -1295,7 +1401,101 @@ onde $\mu_0$ é o valor alegado, $n$ é o número de observações e $s_x$ é o 
 5.	Calcular $t_0$.
 6.	Decidir. Para um teste bicaudal, rejeita-se $H_0$ se $-t_{\frac{\alpha}{2}, \nu}>t_0>t_{\frac{\alpha}{2}, n-1}$, ou melhor, $|t_0|>t_{\frac{\alpha}{2}, \nu}$. Caso se opte pela abordagem do valor-P, rejeita-se $H_0$ se o valor-P for inferior ao valor $\alpha$ de significância do teste. Pode-se ainda verificar se o zero faz parte do intervalo de confiança da diferença, no caso negativo é porque a diferença zero não é provável, rejeitando-se $H_0$.
 
-Neste primeiro exemplo, deixaremos as suposição de normalidade para o final. Iniciamos carregando o arquivo baterias, inspecionando seus dados e analisando a suas estatísticas descritivas mais básicas com o comando `summary()`.
+
+Neste primeiro exemplo, deixaremos as suposição de normalidade para o final. Nossa amostra, tem as seguintes estatísticas:
+
+ - n = 40
+ - $\bar{y} = 3,4125$
+ - $s = 0.7028$
+ 
+ 
+ 
+
+$$
+ep = \frac{s}{\sqrt{n}}
+     = \frac{0,7028}{\sqrt{40}}
+     = \frac{0.7028}{6,3246}
+     \approx 0.1111
+$$
+
+$$
+t_0 =
+    \frac{\bar{y} - \mu_0}{s / \sqrt{n}}=\frac{\bar{y} - \mu_0}{ep} 
+    = \frac{3,4125 - 3,5}{0,1111} \approx -0.0138
+$$
+
+Para um teste bilateral, nível de significância $\alpha=0,05$:
+
+Graus de liberdade:
+
+$$
+\nu= n−1 = 40-1=39
+$$
+
+valor de t crítico bilateral:
+
+$$
+t_{\text{crit}} = t_{0,025;39} \approx \pm 2.022
+$$
+
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Teste t bicaudal para uma amostra (n = 40)"
+#| label: fig-t_bi
+#| fig-align: center
+
+# Valores do teste
+tcrit <- 2.022      # valor crítico bilateral para df = 39
+tcalc <- -0.79      # valor t calculado no seu teste anterior
+
+# Curva normal padrão
+x <- seq(-4, 4, by=0.01)
+y <- dnorm(x)
+
+plot(x, y, type="l", lwd=1, col=1, axes=FALSE, xlab="", ylab="", frame.plot=FALSE)
+
+# Texto da região de aceitação
+# text(0, 0.2, "Região\nde\naceitação", cex=.9)
+
+text(0, 0.20, "Região de\nnão rejeição de", cex = 0.9)
+text(0, 0.16, expression(H[0]), cex = 0.9)
+
+
+# Cor das regiões de rejeição
+cor_rej <- rgb(0.2, 0.5, 0.5, 0.2)
+
+### Região de rejeição à direita
+area_dir <- x[x >= tcrit]
+polygon(c(tcrit, area_dir, max(x)),
+        c(0, dnorm(area_dir), 0),
+        col = cor_rej)
+text(3, 0.2, "Região de\nrejeição", cex=.9)
+text(3, 0.05, expression(P[alpha/2]==0.025), cex=.9)
+
+### Região de rejeição à esquerda
+area_esq <- x[x <= -tcrit]
+polygon(c(min(x), area_esq, -tcrit),
+        c(0, dnorm(area_esq), 0),
+        col = cor_rej)
+text(-3, 0.2, "Região de\nrejeição", cex=.9)
+text(-3, 0.05, expression(P[alpha/2]==0.025), cex=.9)
+
+# Marcação dos valores críticos
+mtext("-2,022", 1, line=0, at=-tcrit, cex=.8)
+mtext("2,022", 1, line=0, at=tcrit, cex=.8)
+
+
+# Linha do valor t calculado
+abline(v = tcalc, col="blue", lwd=2, lty = 2)
+mtext("t0 = −0,0138", 1, line=0, at=tcalc, col="blue", cex=.8)
+
+```
+
+
+
+No R, iniciamos carregando o arquivo baterias, inspecionando seus dados e analisando a suas estatísticas descritivas mais básicas com o comando `summary()`.
 
 ```{r}
 #load(file="bateria.RData")
@@ -1475,8 +1675,8 @@ argamassa
 dados <- data.frame(argamassa, resp)
 dados$argamassa <- factor(dados$argamassa) # Converter em fator
 
-y.means <- tapply(dados$resp, dados$argamassa, mean)
-y.means
+medias <- tapply(dados$resp, dados$argamassa, mean)
+medias
 
 stripchart(resp ~ argamassa,
            data = dados,
@@ -1486,14 +1686,14 @@ stripchart(resp ~ argamassa,
            col = c("blue", "darkgreen"),
            xlab = expression(paste("Strength (", kgf/cm^2, ")")))
 
-points(1:2, y.means, pch = 23, bg = "yellow", cex = 1.5)
+points(1:2, medias, pch = 23, bg = "yellow", cex = 1.5)
 
-text(1:2, y.means,
-     labels = round(y.means, 2),
+text(1:2, medias,
+     labels = round(medias, 2),
      pos = 3, cex = .8)
 ```
 
-O gráfico de pontos (*strichart*) sugere que a distribuição amostral de resistência das fibras não modificadas (*Unmodified*) apresentam valores superiores à distribuição da modificada. As médias, indicadas cadas pelas setas, exibem que a resistência das modificadas é ligeiramente maior do que resistência média das não modificadas.
+O gráfico de pontos (*strichart*) sugere que a distribuição amostral de resistência das fibras não modificadas (*NaoMod*) apresentam valores superiores à distribuição da modificada. As médias, indicadas cadas pelas setas, exibem que a resistência das modificadas é ligeiramente maior do que resistência média das não modificadas.
 
 A seguir, elabora-se o Boxplot com médias indicadas por '+'
 
@@ -1505,13 +1705,13 @@ boxplot(resp ~ argamassa,
         ylab = "Strength (kgf/cm^2)")
 
 
-points(1:2, y.means, pch = 23, bg = "yellow", cex = 1.5)
+points(1:2, medias, pch = 23, bg = "yellow", cex = 1.5)
 ```
 
-Verificação gráfica da normalidade dos dados
+Verificação gráfica da normalidade dos dados. Para filtrar somente os dados de resistência à compressão axial da categoria de argamassa modificada, selecionam-se somente os elementos de respostas associados com o fator 'Modificado nas funções, `dados$resp[dados$argamassa == "Modificado"]`.
 
 ```{r}
-#| echo: false
+#| echo: true
 #| fig-cap: "QQplot Argamassa"
 #| label: fig-qqp_argamassa
 #| fig-align: center
@@ -1530,7 +1730,7 @@ qqline(dados$resp[dados$argamassa == "NaoMod"])
 ```
 
 ```{r}
-#| echo: false
+#| echo: true
 #| fig-cap: "QQplot Argamassa - dados padronizados"
 #| label: fig-qqp_argamassa_pad
 #| fig-align: center
@@ -1538,15 +1738,21 @@ qqline(dados$resp[dados$argamassa == "NaoMod"])
 # Valores padronizados
 par(mfrow = c(1, 2))   # 1 linha, 2 colunas
 
-qqnorm(scale(dados$resp[dados$argamassa == "Modificado"]), main="Modificada"); qqline(scale(dados$resp[dados$argamassa == "Modificado"]))
+qqnorm(scale(dados$resp[dados$argamassa == "Modificado"]),
+       main="Modificada")
+qqline(scale(dados$resp[dados$argamassa == "Modificado"]))
 
-qqnorm(scale(dados$resp[dados$argamassa == "NaoMod"]),main="NaoMod"); qqline(scale(dados$resp[dados$argamassa == "NaoMod"]))
+qqnorm(scale(dados$resp[dados$argamassa == "NaoMod"]),
+       main="NaoMod")
+qqline(scale(dados$resp[dados$argamassa == "NaoMod"]))
 ```
 
 ```{r}
+#| echo: false
 #| fig-cap: "Histograma de Argamassa Modificada"
 #| label: fig-hist_mod
 #| fig-align: center
+#| eval: false
 
 
 # Histogramas
@@ -1557,9 +1763,11 @@ legend(.5,0.6, c("Dens. teórica","Dens. empírica"), fill=c("red", "green"),box
 ```
 
 ```{r}
+#| echo: false
 #| fig-cap: "Histograma de Argamassa Não Modificada"
 #| label: fig-hist_nmod
 #| fig-align: center
+#| eval: false
 
 hist(scale(dados$resp[dados$argamassa == "NaoMod"]), freq=FALSE, xlab = "Resistência", main = "")
 curve(dnorm(x), add=TRUE, col=2); lines(density(scale(dados$resp[dados$argamassa == "NaoMod"])), col=3)
@@ -1584,13 +1792,86 @@ Os dois testes de homocedasticidade são o teste F e o teste de Levene (1960). N
 $$H_0: \sigma_1=\sigma_2$$
 $$H_1: \sigma_1\ne\sigma_2$$
 
+Examine as variâncias das duas amostras:
+
+```{r}
+tapply(dados$resp, dados$argamassa, var)
+```
+
+Não são iguais, mas será que a diferença é significativa a ponto de violar a suposição de igualdade de variâncias? Para determinar a diferença entre as variâncias é grave, testes estatíscos podem ser realizados.
+
+
 #### Teste F de homogeneidade de variâncias
-O teste F para homogeneidade de variâncias é o quociente entre as variâncias das amostras, $s_1^2$ and $s_2^2$.
+
+O teste F de homogeneidade de variâncias é usado para verificar se duas populações têm variâncias iguais, comparando as variâncias das duas amostras, $s_1^2$ and $s_2^2$, por meio do quociente.
 
 
 $$F=\frac{s_1^2}{s_2^2}$$
 
-Com $n_1-1$ graus de liberdade para o numerador e $n_2-1$ graus de liberdade para o denominador.
+Com $n_1-1$ graus de liberdade para o numerador e $n_2-1$ graus de liberdade para o denominador. Se as variâncias forem iguais, esse quociente deve ficar próximo de 1.
+Quanto mais distante de 1, maior a evidência de que as variâncias são diferentes.
+
+A estatística F resultante é:
+
+
+$$F=\frac{s_1^2}{s_2^2}=F=\frac{0,10013778}{0,06146222} \approx 1,6293$$
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Teste F de homogeneidade de variâncias (bicaudal)"
+#| label: fig-f_homogeneidade_bicaudal
+#| fig-align: center
+
+df1 <- 9
+df2 <- 9
+alpha <- 0.05
+
+# Valores críticos bicaudais
+Fcrit_left  <- qf(alpha/2, df1, df2)
+Fcrit_right <- qf(1 - alpha/2, df1, df2)
+
+# Valor F calculado
+Fcalc <- 1.6293
+
+# Curva F
+x <- seq(0, 8, length = 400)
+y <- df(x, df1, df2)
+
+plot(x, y, type="l", lwd=1, col=1, axes=FALSE, xlab="", ylab="", frame.plot=FALSE)
+
+abline(h = 0, lwd = 1)
+
+# Região de rejeição à esquerda
+area_left <- x[x <= Fcrit_left]
+polygon(c(min(x), area_left, Fcrit_left),
+        c(0, df(area_left, df1, df2), 0),
+        col = rgb(0.2, 0.5, 0.5, 0.2))
+
+# Região de rejeição à direita
+area_right <- x[x >= Fcrit_right]
+polygon(c(Fcrit_right, area_right, max(x)),
+        c(0, df(area_right, df1, df2), 0),
+        col = rgb(0.2, 0.5, 0.5, 0.2))
+
+# Região de não rejeição
+text(2.5, 0.15, "Região de\nnão rejeição de", cex = 0.9)
+text(2.5, 0.07, expression(H[0]), cex = 0.9)
+
+# Textos das regiões de rejeição
+text(0.7, 0.15, "Rejeição", cex=.9)
+text(6.5, 0.15, "Rejeição", cex=.9)
+
+# Valores críticos
+mtext(round(Fcrit_left, 3),  side=1, line=0, at=Fcrit_left,  cex=.8)
+mtext(round(Fcrit_right, 3), side=1, line=0, at=Fcrit_right, cex=.8)
+
+# Linha do F calculado
+abline(v = Fcalc, col="blue", lwd=2, lty=2)
+mtext(paste0("F = ", Fcalc), side=1, line=0, at=Fcalc, col="blue", cex=.8)
+
+```
+
 
 No R, a função $var.test()$ realiza o teste F para duas variâncias, podendo ser:
 
@@ -1631,18 +1912,194 @@ leveneTest(resp ~ argamassa, center = mean ,data=dados) # Levene
 ```
 
 
-### O teste t para dois tratamentos independentes
+```{r}
+#| echo: false
+#| fig-cap: "Teste de Levene (Brown–Forsythe)"
+#| label: fig-levene
+#| fig-align: center
+
+library(car)
+
+# Resultado do teste
+res <- leveneTest(resp ~ argamassa, data = dados)
+
+Fcalc <- res$`F value`[1]
+df1   <- res$Df[1]
+df2   <- res$Df[2]
+alpha <- 0.05
+
+# Valor crítico F (bicaudal, mas apenas cauda direita importa)
+Fcrit <- qf(1 - alpha, df1, df2)
+
+# Curva F
+x <- seq(0, 8, length = 400)
+y <- df(x, df1, df2)
+
+plot(x, y, type="l", lwd=1, col=1, axes=FALSE, xlab="", ylab="", frame.plot=FALSE)
+
+# eixo x
+segments(min(x), 0, max(x), 0, lwd = 1)
+
+# Região de não rejeição
+text(1, 0.50, "Região de\nnão rejeição de", cex = 0.9)
+text(1, 0.46, expression(H[0]), cex = 0.9)
+
+# Região de rejeição (cauda direita)
+area <- x[x >= Fcrit]
+polygon(c(Fcrit, area, max(x)),
+        c(0, df(area, df1, df2), 0),
+        col = rgb(0.2, 0.5, 0.5, 0.2))
+
+text(6, 0.50, "Região\nde rejeição", cex=.9)
+text(Fcrit, 0.30, expression(alpha == 0.05), cex=.9)
+
+# Linha do valor F calculado
+abline(v = Fcalc, col="blue", lwd=2, lty=2)
+mtext(paste0("F = ", round(Fcalc, 4)), side=1, line=0, at=Fcalc, col="blue", cex=.8)
+
+# Valor crítico no eixo
+mtext(round(Fcrit, 3), side=1, line=0, at=Fcrit, cex=.8)
+
+```
+
+
+
+
+
+### O teste T para dois tratamentos independentes
+
 Finalmente, tendo em conta que as distribuições são normalmente distribuídas, pode-se realizar o teste t de duas maneiras conforme as variâncias das amostram sejam ou não iguais.
 
-No caso das variâncias serem  iguais, $s_1^2$ e $s_2^2$, significa que ambas estimam o mesmo valor, podendo ser combinadas numa estimativa única $s_p^2$.
+No caso das variâncias serem  iguais, $s_1^2$ e $s_2^2$, significa que ambas estimam o mesmo valor, podendo ser combinadas (pooled) numa estimativa única $s_p^2$.
 
-$$S_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$
+$$s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$
+
+O desvio-padrão combinado (pooled) é:
+
+$$
+s_p=\sqrt{s_p^2}
+$$
+
 
 Nesse caso, para testar $H_0$, a estatística teste é a seguinte:
 
-$$t_0=\frac{\bar{x_1}-\bar{x_2}}{s_p^2\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$
+$$t_0=\frac{\bar{x_1}-\bar{x_2}}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$
+
+Considerando os valores das duas amostras, temos:
+
+ - $n_1 = 10$ 3 $n_2 = 10$
+ - $s_1^2 = 0.10013778$ e $s_2^2 = 0.06146222$
+ 
+
+
+$$s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}
+       = \frac{9(0,10013778) + 9(0,06146222)}{18}
+\approx
+0,0808
+$$
+
+
+
+$$
+s_p = \sqrt{0,0808} \approx 0,2842
+$$
+
+Erro-padrão das diferenças das médias:
+
+$$
+ep
+= s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}
+= 0,2842 \sqrt{0,2}
+= 0,2842 \times 0,4472 \approx 0,1271
+$$
+
+Estatística T calculado:
+
+$$
+t_0
+= \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+= \frac{16,764 - 17.023}{0,2842 \sqrt{\frac{1}{10} + \frac{1}{10}}}
+= \frac{-0.278}{0,1271} \approx -2.19
+$$
+
 
 Se $H_0$ for verdadeira, $t_0$ é distribuída como $t_{n1+n2-2}$, para o teste bicaudal, sendo, contudo rejeitada em favor de $H_1$ se $|t_0| \geq t_{\alpha/2, n1+n2-2}$.
+
+
+Para um teste bilateral, nível de significância $\alpha=0,05$:
+
+Graus de liberdade:
+
+$$
+\nu = n_1 + n_2 - 2 = 10 + 10 - 2 = 18
+$$
+
+
+valor de t crítico bilateral:
+
+$$
+t_{\text{crit}} = t_{0.025;\,18} \approx \pm 2.101
+$$
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Teste t bicaudal para duas amostras (df = 18)"
+#| label: fig-t_bi_2samples
+#| fig-align: center
+
+# Valores do teste
+tcrit <- 2.101      # valor crítico bilateral para df = 18
+tcalc <- -2.19      # valor t calculado para duas amostras
+
+# Curva normal padrão
+x <- seq(-4, 4, by=0.01)
+y <- dnorm(x)
+
+plot(x, y, type="l", lwd=1, col=1, axes=FALSE, xlab="", ylab="", frame.plot=FALSE)
+
+# Texto da região de aceitação
+# text(0, 0.2, "Região\nde\naceitação", cex=.9)
+
+text(0, 0.20, "Região de\nnão rejeição de", cex = 0.9)
+text(0, 0.16, expression(H[0]), cex = 0.9)
+
+
+
+
+# Cor das regiões de rejeição
+cor_rej <- rgb(0.2, 0.5, 0.5, 0.2)
+
+### Região de rejeição à direita
+area_dir <- x[x >= tcrit]
+polygon(c(tcrit, area_dir, max(x)),
+        c(0, dnorm(area_dir), 0),
+        col = cor_rej)
+text(3, 0.2, "Região de\nrejeição", cex=.9)
+text(3, 0.05, expression(P[alpha/2]==0.025), cex=.9)
+
+### Região de rejeição à esquerda
+area_esq <- x[x <= -tcrit]
+polygon(c(min(x), area_esq, -tcrit),
+        c(0, dnorm(area_esq), 0),
+        col = cor_rej)
+text(-3, 0.2, "Região de\nrejeição", cex=.9)
+text(-3, 0.05, expression(P[alpha/2]==0.025), cex=.9)
+
+# Marcação dos valores críticos
+mtext("-2,101", 1, line= 0.1, at=-tcrit, cex=.8)
+mtext("2,101", 1, line = -0.1, at=tcrit, cex=.8)
+
+# Linha do valor t calculado
+abline(v = tcalc, col="blue", lwd=2, lty = 2)
+mtext("t0 = −2,19", 1, line= -.6, at=tcalc-0.5, col="blue", cex=.8)
+
+```
+
+
+
+
+
 
 Todavia se não for possível supor que as variâncias desconhecidas são iguais,  que não existe um teste t exato para $H_0:\mu_1=\mu_2$,como explicam Hines et al. Nesse caso, pode ser utilizado a estatística 
 
@@ -1653,6 +2110,14 @@ que, se a hipótese nula for verdadeira, segue aproximadamente distribuição t,
 $$\nu=\frac{\left(\tfrac{s_1^2}{n_1}+\tfrac{s_2^2}{n_2}\right)^2}{\frac{\left(\tfrac{s_1^2}{n_1}\right)^2}{n_1+1}+\frac{\left(\tfrac{s_2^2}{n_2}\right)^2}{n_2+1}}-2$$
 
 No R, como será demonstrado a frente, os dois casos são facilmente tratados.  Se as variâncias forem iguais, basta ajustar o argumento `var.equal=T`, mas se forem diferentes, ajusta-se o argumento `var.equal=F` ou se deixa em branco, uma vez que este é o *default* da função.
+
+
+
+
+
+
+
+
 
 No exemplo, as etapas do teste t seriam realizadas da seguinte maneira:
 
@@ -1667,7 +2132,7 @@ A seguir os comandos do teste t para dois tratamentos independentes no R, consid
 
 ```{r}
 ### Teste t para amostras independentes com variáveis iguais
-t.test(resp ~ argamassa, var.equal=T)
+t.test(resp ~ argamassa, data = dados, var.equal=T)
 ```
 
 Para se obter o valor crítico $t_{0,05/2;18}$
